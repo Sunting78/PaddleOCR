@@ -22,7 +22,7 @@
     
     
       
-        <title>印章文本识别产线使用教程 - PaddleOCR Documentation</title>
+        <title>Seal Text Recognition Pipeline Tutorial - PaddleOCR Documentation</title>
       
     
     
@@ -142,7 +142,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#seal-text-recognition-pipeline-tutorial" class="md-skip">
           Skip to content
         </a>
       
@@ -193,7 +193,7 @@ You're not viewing the latest version.
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              印章文本识别产线使用教程
+              Seal Text Recognition Pipeline Tutorial
             
           </span>
         </div>
@@ -5376,22 +5376,22 @@ You're not viewing the latest version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-introduction-to-seal-text-recognition-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
-      1. 印章文本识别产线介绍
+      1. Introduction to Seal Text Recognition Pipeline
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-quick-start" class="md-nav__link">
     <span class="md-ellipsis">
-      2. 快速开始
+      2. Quick Start
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 快速开始">
+    <nav class="md-nav" aria-label="2. Quick Start">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5401,12 +5401,13 @@ You're not viewing the latest version.
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="2.1 命令行方式体验">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#22-python" class="md-nav__link">
+  <a href="#222-python-script-integration" class="md-nav__link">
     <span class="md-ellipsis">
-      2.2 Python脚本方式集成
+      2.2.2 Python Script Integration
     </span>
   </a>
   
@@ -5416,20 +5417,25 @@ You're not viewing the latest version.
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-development-integrationdeployment" class="md-nav__link">
     <span class="md-ellipsis">
-      3. 开发集成/部署
+      3. Development Integration/Deployment
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-custom-development" class="md-nav__link">
     <span class="md-ellipsis">
-      4. 二次开发
+      4. Custom Development
     </span>
   </a>
   
@@ -5451,7 +5457,7 @@ You're not viewing the latest version.
 
 
   
-    <a href="https://github.com/PaddlePaddle/PaddleOCR/edit/main/docs/version3.x/pipeline_usage/seal_recognition.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/PaddlePaddle/PaddleOCR/edit/main/docs/version3.x/pipeline_usage/seal_recognition.en.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></svg>
     </a>
@@ -5460,1665 +5466,1857 @@ You're not viewing the latest version.
     
       
     
-    <a href="https://github.com/PaddlePaddle/PaddleOCR/raw/main/docs/version3.x/pipeline_usage/seal_recognition.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/PaddlePaddle/PaddleOCR/raw/main/docs/version3.x/pipeline_usage/seal_recognition.en.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
     </a>
   
 
 
-<h1 id="_1">印章文本识别产线使用教程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="1">1. 印章文本识别产线介绍<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p>印章文本识别是一种自动从文档或图像中提取和识别印章内容的技术，印章文本的识别是文档处理的一部分，在很多场景都有用途，例如合同比对，出入库审核以及发票报销审核等场景。</p>
-<p>印章文本识别产线用于识别印章的文本内容，提取印章图像中的文字信息以文本形式输出，本产线集成了业界知名的 PP-OCRv4 的端到端 OCR 串联系统，支持弯曲印章文本的检测和识别。同时，本产线集成了可选的版面区域定位模块，可以在整个文档中准确定位印章所在的版面位置。此外也增加可选的文档图像的方向矫正和扭曲矫正功能。基于本产线，可实现 CPU 上毫秒级的文本内容精准预测。本产线同时提供了灵活的服务化部署方式，支持在多种硬件上使用多种编程语言调用。不仅如此，本产线也提供了二次开发的能力，您可以基于本产线在您自己的数据集上训练调优，训练后的模型也可以无缝集成。</p>
+<h1 id="seal-text-recognition-pipeline-tutorial">Seal Text Recognition Pipeline Tutorial<a class="headerlink" href="#seal-text-recognition-pipeline-tutorial" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduction-to-seal-text-recognition-pipeline">1. Introduction to Seal Text Recognition Pipeline<a class="headerlink" href="#1-introduction-to-seal-text-recognition-pipeline" title="Permanent link">&para;</a></h2>
+<p>Seal text recognition is a technology that automatically extracts and recognizes the content of seals from documents or images. The recognition of seal text is part of document processing and has many applications in various scenarios, such as contract comparison, warehouse entry and exit review, and invoice reimbursement review.</p>
+<p>The seal text recognition pipeline is used to recognize the text content of seals, extracting the text information from seal images and outputting it in text form. This pipeline integrates the industry-renowned end-to-end OCR system PP-OCRv4, supporting the detection and recognition of curved seal text. Additionally, this pipeline integrates an optional layout region localization module, which can accurately locate the layout position of the seal within the entire document. It also includes optional document image orientation correction and distortion correction functions. Based on this pipeline, millisecond-level accurate text content prediction can be achieved on a CPU. This pipeline also provides flexible service deployment methods, supporting the use of multiple programming languages on various hardware. Moreover, it offers custom development capabilities, allowing you to train and fine-tune on your own dataset based on this pipeline, and the trained model can be seamlessly integrated.</p>
 <p><img src="https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/doc_images/practical_tutorial/PP-ChatOCRv3_doc_seal/01.png"/></p>
-<p><b>印章文本识别产线中包含以下5个模块。每个模块均可独立进行训练和推理，并包含多个模型。有关详细信息，请点击相应模块以查看文档。</b></p>
+<p><b>The seal text recognition</b> pipeline includes a seal text detection module and a text recognition module, as well as optional layout detection module, document image orientation classification module, and text image correction module.</p>
 <ul>
-<li><a href="../module_usage/seal_text_detection.html">印章文本检测模块</a></li>
-<li><a href="../module_usage/text_recognition.html">文本识别模块</a></li>
-<li><a href="../module_usage/layout_detection.html">版面区域检测模块</a>（可选）</li>
-<li><a href="../module_usage/doc_img_orientation_classification.html">文档图像方向分类模块</a> （可选）</li>
-<li><a href="../module_usage/text_image_unwarping.html">文本图像矫正模块</a> （可选）</li>
+<li><a href="../module_usage/seal_text_detection.html">Seal Text Detection Module</a></li>
+<li><a href="../module_usage/text_recognition.en.md">Text Recognition Module</a></li>
+<li><a href="../module_usage/layout_detection.en.mdmd">Layout Detection Module</a> (Optional)</li>
+<li><a href="../module_usage/doc_img_orientation_classification.en.md">Document Image Orientation Classification Module</a> (Optional)</li>
+<li><a href="../module_usage/text_image_unwarping.html">Text Image Unwarping Module</a> (Optional)</li>
 </ul>
-<p>在本产线中，您可以根据下方的基准测试数据选择使用的模型。</p>
-<details>
-<summary> <b>版面区域检测模块（可选）：</b></summary>
+<p><b>If you prioritize model accuracy, choose a model with higher accuracy. If you prioritize inference speed, choose a model with faster inference speed. If you prioritize model storage size, choose a model with smaller storage size.</b></p>
+<p><b>Layout Region Detection Module (Optional):</b></p>
 
-* <b>版面检测模型，包含23个常见的类别：文档标题、段落标题、文本、页码、摘要、目录、参考文献、脚注、页眉、页脚、算法、公式、公式编号、图像、图表标题、表格、表格标题、印章、图表标题、图表、页眉图像、页脚图像、侧栏文本</b>
+<ul>
+<li><b>The layout detection model includes 20 common categories: document title, paragraph title, text, page number, abstract, table, references, footnotes, header, footer, algorithm, formula, formula number, image, table, seal, figure_table title, chart, and sidebar text and lists of references</b></li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>mAP(0.5)（%）</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>mAP(0.5) (%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>PP-DocLayout-L</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout-L_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout-L_pretrained.pdparams">训练模型</a></td>
+<td>PP-DocLayout_plus-L</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout_plus-L_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout_plus-L_pretrained.pdparams">Training Model</a></td>
+<td>83.2</td>
+<td>34.6244 / 10.3945</td>
+<td>510.57 / - </td>
+<td>126.01 M</td>
+<td>A higher-precision layout area localization model trained on a self-built dataset containing Chinese and English papers, PPT, multi-layout magazines, contracts, books, exams, ancient books and research reports using RT-DETR-L</td>
+</tr>
+<tr>
+</tbody>
+</table>
+
+<ul>
+<li><b>Layout detection model, including 23 common categories: document title, paragraph title, text, page number, abstract, table of contents, references, footnotes, header, footer, algorithm, formula, formula number, image, chart title, table, table title, seal, chart title, chart, header image, footer image, sidebar text</b></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Model</th><th>Model Download Link</th>
+<th>mAP(0.5) (%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PP-DocLayout-L</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout-L_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout-L_pretrained.pdparams">Training Model</a></td>
 <td>90.4</td>
 <td>34.6244 / 10.3945</td>
 <td>510.57 / -</td>
 <td>123.76 M</td>
-<td>基于RT-DETR-L在包含中英文论文、杂志、合同、书本、试卷和研报等场景的自建数据集训练的高精度版面区域定位模型</td>
+<td>A high-precision layout area localization model trained on a self-built dataset containing Chinese and English papers, magazines, contracts, books, exams, and research reports using RT-DETR-L.</td>
 </tr>
 <tr>
-<td>PP-DocLayout-M</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout-M_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout-M_pretrained.pdparams">训练模型</a></td>
+<td>PP-DocLayout-M</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout-M_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout-M_pretrained.pdparams">Training Model</a></td>
 <td>75.2</td>
 <td>13.3259 / 4.8685</td>
 <td>44.0680 / 44.0680</td>
 <td>22.578</td>
-<td>基于PicoDet-L在包含中英文论文、杂志、合同、书本、试卷和研报等场景的自建数据集训练的精度效率平衡的版面区域定位模型</td>
+<td>A layout area localization model with balanced precision and efficiency, trained on a self-built dataset containing Chinese and English papers, magazines, contracts, books, exams, and research reports using PicoDet-L.</td>
 </tr>
 <tr>
-<td>PP-DocLayout-S</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout-S_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout-S_pretrained.pdparams">训练模型</a></td>
+<td>PP-DocLayout-S</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayout-S_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-DocLayout-S_pretrained.pdparams">Training Model</a></td>
 <td>70.9</td>
 <td>8.3008 / 2.3794</td>
 <td>10.0623 / 9.9296</td>
 <td>4.834</td>
-<td>基于PicoDet-S在中英文论文、杂志、合同、书本、试卷和研报等场景上自建数据集训练的高效率版面区域定位模型</td>
+<td>A high-efficiency layout area localization model trained on a self-built dataset containing Chinese and English papers, magazines, contracts, books, exams, and research reports using PicoDet-S.</td>
 </tr>
 </tbody>
 </table>
 
+<blockquote>
+<p>❗ The above list includes the <b>4 core models</b> that are key supported by the text recognition module. The module actually supports a total of <b>13 full models</b>. It includes multiple predefined models of different categories, among which there are 10 models specifically for the seal category. Apart from the three core models mentioned above, the remaining models are listed as follows:</p>
+</blockquote>
+<details><summary> 👉 Details of Model List</summary>
 
->❗ 以上列出的是版面检测模块重点支持的<b>3个核心模型</b>，该模块总共支持<b>11个全量模型</b>，包含多个预定义了不同类别的模型，其中包含印章类别的模型有9个，除上述3个核心模型外，其余模型列表如下：
-
-
-<details><summary> 👉模型列表详情</summary>
-
-* <b>3类版面检测模型，包含表格、图像、印章</b>
+* <b>3-Class Layout Detection Model, including Table, Image, and Stamp</b>
 <table>
 <thead>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>mAP(0.5)（%）</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>mAP(0.5) (%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>PicoDet-S_layout_3cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-S_layout_3cls_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-S_layout_3cls_pretrained.pdparams">训练模型</a></td>
+<td>PicoDet-S_layout_3cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-S_layout_3cls_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-S_layout_3cls_pretrained.pdparams">Training Model</a></td>
 <td>88.2</td>
 <td>8.99 / 2.22</td>
 <td>16.11 / 8.73</td>
 <td>4.8</td>
-<td>基于PicoDet-S轻量模型在中英文论文、杂志和研报等场景上自建数据集训练的高效率版面区域定位模型</td>
+<td>A high-efficiency layout area localization model trained on a self-built dataset of Chinese and English papers, magazines, and research reports using PicoDet-S.</td>
 </tr>
 <tr>
-<td>PicoDet-L_layout_3cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-L_layout_3cls_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-L_layout_3cls_pretrained.pdparams">训练模型</a></td>
+<td>PicoDet-L_layout_3cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-L_layout_3cls_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-L_layout_3cls_pretrained.pdparams">Training Model</a></td>
 <td>89.0</td>
 <td>13.05 / 4.50</td>
 <td>41.30 / 41.30</td>
 <td>22.6</td>
-<td>基于PicoDet-L在中英文论文、杂志和研报等场景上自建数据集训练的效率精度均衡版面区域定位模型</td>
+<td>A balanced efficiency and precision layout area localization model trained on a self-built dataset of Chinese and English papers, magazines, and research reports using PicoDet-L.</td>
 </tr>
 <tr>
-<td>RT-DETR-H_layout_3cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/RT-DETR-H_layout_3cls_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/RT-DETR-H_layout_3cls_pretrained.pdparams">训练模型</a></td>
+<td>RT-DETR-H_layout_3cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/RT-DETR-H_layout_3cls_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/RT-DETR-H_layout_3cls_pretrained.pdparams">Training Model</a></td>
 <td>95.8</td>
 <td>114.93 / 27.71</td>
 <td>947.56 / 947.56</td>
 <td>470.1</td>
-<td>基于RT-DETR-H在中英文论文、杂志和研报等场景上自建数据集训练的高精度版面区域定位模型</td>
+<td>A high-precision layout area localization model trained on a self-built dataset of Chinese and English papers, magazines, and research reports using RT-DETR-H.</td>
 </tr>
 </tbody></table>
 
-* <b>17类区域检测模型，包含17个版面常见类别，分别是：段落标题、图片、文本、数字、摘要、内容、图表标题、公式、表格、表格标题、参考文献、文档标题、脚注、页眉、算法、页脚、印章</b>
+* <b>17-Class Area Detection Model, including 17 common layout categories: Paragraph Title, Image, Text, Number, Abstract, Content, Figure Caption, Formula, Table, Table Caption, References, Document Title, Footnote, Header, Algorithm, Footer, and Stamp</b>
 <table>
 <thead>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>mAP(0.5)（%）</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>mAP(0.5) (%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>PicoDet-S_layout_17cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-S_layout_17cls_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-S_layout_17cls_pretrained.pdparams">训练模型</a></td>
+<td>PicoDet-S_layout_17cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-S_layout_17cls_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-S_layout_17cls_pretrained.pdparams">Training Model</a></td>
 <td>87.4</td>
 <td>9.11 / 2.12</td>
 <td>15.42 / 9.12</td>
 <td>4.8</td>
-<td>基于PicoDet-S轻量模型在中英文论文、杂志和研报等场景上自建数据集训练的高效率版面区域定位模型</td>
+<td>A high-efficiency layout area localization model trained on a self-built dataset of Chinese and English papers, magazines, and research reports using PicoDet-S.</td>
 </tr>
 <tr>
-<td>PicoDet-L_layout_17cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-L_layout_17cls_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-L_layout_17cls_pretrained.pdparams">训练模型</a></td>
+<td>PicoDet-L_layout_17cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PicoDet-L_layout_17cls_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PicoDet-L_layout_17cls_pretrained.pdparams">Training Model</a></td>
 <td>89.0</td>
 <td>13.50 / 4.69</td>
 <td>43.32 / 43.32</td>
 <td>22.6</td>
-<td>基于PicoDet-L在中英文论文、杂志和研报等场景上自建数据集训练的效率精度均衡版面区域定位模型</td>
+<td>A balanced efficiency and precision layout area localization model trained on a self-built dataset of Chinese and English papers, magazines, and research reports using PicoDet-L.</td>
 </tr>
 <tr>
-<td>RT-DETR-H_layout_17cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/RT-DETR-H_layout_17cls_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/RT-DETR-H_layout_17cls_pretrained.pdparams">训练模型</a></td>
+<td>RT-DETR-H_layout_17cls</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/RT-DETR-H_layout_17cls_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/RT-DETR-H_layout_17cls_pretrained.pdparams">Training Model</a></td>
 <td>98.3</td>
 <td>115.29 / 104.09</td>
 <td>995.27 / 995.27</td>
 <td>470.2</td>
-<td>基于RT-DETR-H在中英文论文、杂志和研报等场景上自建数据集训练的高精度版面区域定位模型</td>
+<td>A high-precision layout area localization model trained on a self-built dataset of Chinese and English papers, magazines, and research reports using RT-DETR-H.</td>
 </tr>
 </tbody>
 </table>
 </details>
-</details>
 
-<details>
-<summary> <b>文档图像方向分类模块（可选）：</b></summary>
+<p><b>Document Image Orientation Classification Module (Optional):</b></p>
 <table>
 <thead>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>Top-1 Acc（%）</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M)</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Top-1 Acc (%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>PP-LCNet_x1_0_doc_ori</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-LCNet_x1_0_doc_ori_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-LCNet_x1_0_doc_ori_pretrained.pdparams">训练模型</a></td>
+<td>PP-LCNet_x1_0_doc_ori</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-LCNet_x1_0_doc_ori_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-LCNet_x1_0_doc_ori_pretrained.pdparams">Training Model</a></td>
 <td>99.06</td>
 <td>2.31 / 0.43</td>
 <td>3.37 / 1.27</td>
 <td>7</td>
-<td>基于PP-LCNet_x1_0的文档图像分类模型，含有四个类别，即0度，90度，180度，270度</td>
+<td>A document image classification model based on PP-LCNet_x1_0, containing four categories: 0 degrees, 90 degrees, 180 degrees, and 270 degrees</td>
 </tr>
 </tbody>
 </table>
-</details>
-
-<details>
-<summary> <b>文本图像矫正模块（可选）：</b></summary>
+<p><b>Text Image Correction Module (Optional):</b></p>
 <table>
 <thead>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>CER </th>
-<th>模型存储大小（M)</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>CER</th>
+<th>Model Storage Size (M)</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>UVDoc</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/UVDoc_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/UVDoc_pretrained.pdparams">训练模型</a></td>
+<td>UVDoc</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/UVDoc_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/UVDoc_pretrained.pdparams">Training Model</a></td>
 <td>0.179</td>
 <td>30.3 M</td>
-<td>高精度文本图像矫正模型</td>
+<td>High-precision text image correction model</td>
 </tr>
 </tbody>
 </table>
-</details>
 
-<details>
-<summary> <b>印章文本检测模块：</b></summary>
+<p><b>Text Detection Module:</b></p>
 <table>
 <thead>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>检测Hmean（%）</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M)</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Detection Hmean (%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>PP-OCRv4_server_seal_det</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_seal_det_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_seal_det_pretrained.pdparams">训练模型</a></td>
-<td>98.40</td>
+<td>PP-OCRv4_server_seal_det</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_seal_det_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_seal_det_pretrained.pdparams">Training Model</a></td>
+<td>98.21</td>
 <td>74.75 / 67.72</td>
 <td>382.55 / 382.55</td>
 <td>109</td>
-<td>PP-OCRv4的服务端印章文本检测模型，精度更高，适合在较好的服务器上部署</td>
+<td>PP-OCRv4 server-side seal text detection model, with higher accuracy, suitable for deployment on better servers</td>
 </tr>
 <tr>
-<td>PP-OCRv4_mobile_seal_det</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_mobile_seal_det_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_mobile_seal_det_pretrained.pdparams">训练模型</a></td>
-<td>96.36</td>
+<td>PP-OCRv4_mobile_seal_det</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_mobile_seal_det_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_mobile_seal_det_pretrained.pdparams">Training Model</a></td>
+<td>96.47</td>
 <td>7.82 / 3.09</td>
 <td>48.28 / 23.97</td>
 <td>4.6</td>
-<td>PP-OCRv4的移动端印章文本检测模型，效率更高，适合在端侧部署</td>
+<td>PP-OCRv4 mobile-side seal text detection model, with higher efficiency, suitable for deployment on the edge</td>
 </tr>
 </tbody>
 </table>
-</details>
 
-<details>
-<summary> <b>文本识别模块：</b></summary>
+<p><b>Text Recognition Module:</b></p>
+
 <table>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>识别 Avg Accuracy(%)</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Recognition Avg Accuracy(%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 <tr>
-<td>PP-OCRv4_server_rec_doc</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-PP-OCRv4_server_rec_doc_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_rec_doc_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv4_server_rec_doc</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_rec_doc_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>81.53</td>
 <td>6.65 / 2.38</td>
 <td>32.92 / 32.92</td>
 <td>74.7 M</td>
-<td>PP-OCRv4_server_rec_doc是在PP-OCRv4_server_rec的基础上，在更多中文文档数据和PP-OCR训练数据的混合数据训练而成，增加了部分繁体字、日文、特殊字符的识别能力，可支持识别的字符为1.5万+，除文档相关的文字识别能力提升外，也同时提升了通用文字的识别能力</td>
+<td>PP-OCRv4_server_rec_doc is trained on a mixed dataset of more Chinese document data and PP-OCR training data based on PP-OCRv4_server_rec. It has added the ability to recognize some traditional Chinese characters, Japanese, and special characters, and can support the recognition of more than 15,000 characters. In addition to improving the text recognition capability related to documents, it also enhances the general text recognition capability.</td>
 </tr>
 <tr>
-<td>PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_mobile_rec_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_mobile_rec_pretrained.pdparams">Training Model</a></td>
 <td>78.74</td>
 <td>4.82 / 1.20</td>
 <td>16.74 / 4.64</td>
 <td>10.6 M</td>
-<td>PP-OCRv4的轻量级识别模型，推理效率高，可以部署在包含端侧设备的多种硬件设备中</td>
+<td>
+The lightweight recognition model of PP-OCRv4 has high inference efficiency and can be deployed on various hardware devices, including edge devices.</td>
 </tr>
 <tr>
-<td>PP-OCRv4_server_rec </td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_rec_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv4_server_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_rec_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_rec_pretrained.pdparams">Training Model</a></td>
 <td>80.61 </td>
 <td>6.58 / 2.43</td>
 <td>33.17 / 33.17</td>
 <td>71.2 M</td>
-<td>PP-OCRv4的服务器端模型，推理精度高，可以部署在多种不同的服务器上</td>
+<td>The server-side model of PP-OCRv4 offers high inference accuracy and can be deployed on various types of servers.</td>
 </tr>
 <tr>
-<td>en_PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-en_PP-OCRv4_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/en_PP-OCRv4_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>en_PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/en_PP-OCRv4_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>70.39</td>
 <td>4.81 / 0.75</td>
 <td>16.10 / 5.31</td>
 <td>6.8 M</td>
-<td>基于PP-OCRv4识别模型训练得到的超轻量英文识别模型，支持英文、数字识别</td>
+<td>The ultra-lightweight English recognition model, trained based on the PP-OCRv4 recognition model, supports the recognition of English letters and numbers.</td>
 </tr>
 </table>
 
-> ❗ 以上列出的是文本识别模块重点支持的<b>4个核心模型</b>，该模块总共支持<b>18个全量模型</b>，包含多个多语言文本识别模型，完整的模型列表如下：
+<blockquote>
+<p>❗ The above list features the <b>4 core models</b> that the text recognition module primarily supports. In total, this module supports <b>18 models</b>. The complete list of models is as follows:</p>
+</blockquote>
+<details><summary> 👉Model List Details</summary>
 
-<details><summary> 👉模型列表详情</summary>
-
-* <b>中文识别模型</b>
+* <b>Chinese Recognition Model</b>
 <table>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>识别 Avg Accuracy(%)</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Recognition Avg Accuracy(%)</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 <tr>
-<td>PP-OCRv4_server_rec_doc</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-PP-OCRv4_server_rec_doc_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_rec_doc_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv4_server_rec_doc</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_rec_doc_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>81.53</td>
 <td>6.65 / 2.38</td>
 <td>32.92 / 32.92</td>
 <td>74.7 M</td>
-<td>PP-OCRv4_server_rec_doc是在PP-OCRv4_server_rec的基础上，在更多中文文档数据和PP-OCR训练数据的混合数据训练而成，增加了部分繁体字、日文、特殊字符的识别能力，可支持识别的字符为1.5万+，除文档相关的文字识别能力提升外，也同时提升了通用文字的识别能力</td>
+<td>PP-OCRv4_server_rec_doc is trained on a mixed dataset of more Chinese document data and PP-OCR training data based on PP-OCRv4_server_rec. It has added the recognition capabilities for some traditional Chinese characters, Japanese, and special characters. The number of recognizable characters is over 15,000. In addition to the improvement in document-related text recognition, it also enhances the general text recognition capability.</td>
 </tr>
 <tr>
-<td>PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_mobile_rec_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_mobile_rec_pretrained.pdparams">Training Model</a></td>
 <td>78.74</td>
 <td>4.82 / 1.20</td>
 <td>16.74 / 4.64</td>
 <td>10.6 M</td>
-<td>PP-OCRv4的轻量级识别模型，推理效率高，可以部署在包含端侧设备的多种硬件设备中</td>
+<td>The lightweight recognition model of PP-OCRv4 has high inference efficiency and can be deployed on various hardware devices, including edge devices.</td>
 </tr>
 <tr>
-<td>PP-OCRv4_server_rec </td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_rec_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv4_server_rec </td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv4_server_rec_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv4_server_rec_pretrained.pdparams">Training Model</a></td>
 <td>80.61 </td>
 <td>6.58 / 2.43</td>
 <td>33.17 / 33.17</td>
 <td>71.2 M</td>
-<td>PP-OCRv4的服务器端模型，推理精度高，可以部署在多种不同的服务器上</td>
+<td>The server-side model of PP-OCRv4 offers high inference accuracy and can be deployed on various types of servers.</td>
 </tr>
 <tr>
-<td>PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>72.96</td>
 <td>5.87 / 1.19</td>
 <td>9.07 / 4.28</td>
 <td>9.2 M</td>
-<td>PP-OCRv3的轻量级识别模型，推理效率高，可以部署在包含端侧设备的多种硬件设备中</td>
+<td>PP-OCRv3’s lightweight recognition model is designed for high inference efficiency and can be deployed on a variety of hardware devices, including edge devices.</td>
 </tr>
 </table>
 
 <table>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>识别 Avg Accuracy(%)</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Recognition Avg Accuracy(%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 <tr>
-<td>ch_SVTRv2_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/ch_SVTRv2_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/ch_SVTRv2_rec_pretrained.pdparams">训练模型</a></td>
+<td>ch_SVTRv2_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/ch_SVTRv2_rec_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/ch_SVTRv2_rec_pretrained.pdparams">Training Model</a></td>
 <td>68.81</td>
 <td>8.08 / 2.74</td>
 <td>50.17 / 42.50</td>
 <td>73.9 M</td>
 <td rowspan="1">
-SVTRv2 是一种由复旦大学视觉与学习实验室（FVL）的OpenOCR团队研发的服务端文本识别模型，其在PaddleOCR算法模型挑战赛 - 赛题一：OCR端到端识别任务中荣获一等奖，A榜端到端识别精度相比PP-OCRv4提升6%。
+SVTRv2 is a server text recognition model developed by the OpenOCR team of Fudan University's Visual and Learning Laboratory (FVL). It won the first prize in the PaddleOCR Algorithm Model Challenge - Task One: OCR End-to-End Recognition Task. The end-to-end recognition accuracy on the A list is 6% higher than that of PP-OCRv4.
 </td>
 </tr>
 </table>
 
 <table>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>识别 Avg Accuracy(%)</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Recognition Avg Accuracy(%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 <tr>
-<td>ch_RepSVTR_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/ch_RepSVTR_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/ch_RepSVTR_rec_pretrained.pdparams">训练模型</a></td>
+<td>ch_RepSVTR_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/ch_RepSVTR_rec_infer.tar">Inference Model</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/ch_RepSVTR_rec_pretrained.pdparams">Training Model</a></td>
 <td>65.07</td>
 <td>5.93 / 1.62</td>
 <td>20.73 / 7.32</td>
 <td>22.1 M</td>
-<td rowspan="1">    RepSVTR 文本识别模型是一种基于SVTRv2 的移动端文本识别模型，其在PaddleOCR算法模型挑战赛 - 赛题一：OCR端到端识别任务中荣获一等奖，B榜端到端识别精度相比PP-OCRv4提升2.5%，推理速度持平。</td>
+<td rowspan="1">    The RepSVTR text recognition model is a mobile text recognition model based on SVTRv2. It won the first prize in the PaddleOCR Algorithm Model Challenge - Task One: OCR End-to-End Recognition Task. The end-to-end recognition accuracy on the B list is 2.5% higher than that of PP-OCRv4, with the same inference speed.</td>
 </tr>
 </table>
 
-* <b>英文识别模型</b>
+* <b>English Recognition Model</b>
 <table>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>识别 Avg Accuracy(%)</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Recognition Avg Accuracy(%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 <tr>
-<td>en_PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-en_PP-OCRv4_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/en_PP-OCRv4_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>en_PP-OCRv4_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/en_PP-OCRv4_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td> 70.39</td>
 <td>4.81 / 0.75</td>
 <td>16.10 / 5.31</td>
 <td>6.8 M</td>
-<td>基于PP-OCRv4识别模型训练得到的超轻量英文识别模型，支持英文、数字识别</td>
+<td>The ultra-lightweight English recognition model trained based on the PP-OCRv4 recognition model supports the recognition of English and numbers.</td>
 </tr>
 <tr>
-<td>en_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-en_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/en_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>en_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/en_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>70.69</td>
 <td>5.44 / 0.75</td>
 <td>8.65 / 5.57</td>
 <td>7.8 M </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量英文识别模型，支持英文、数字识别</td>
+<td>The ultra-lightweight English recognition model trained based on the PP-OCRv3 recognition model supports the recognition of English and numbers.</td>
 </tr>
 </table>
 
-* <b>多语言识别模型</b>
+* <b>Multilingual Recognition Model</b>
 <table>
 <tr>
-<th>模型</th><th>模型下载链接</th>
-<th>识别 Avg Accuracy(%)</th>
-<th>GPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>CPU推理耗时（ms）<br/>[常规模式 / 高性能模式]</th>
-<th>模型存储大小（M）</th>
-<th>介绍</th>
+<th>Model</th><th>Model Download Link</th>
+<th>Recognition Avg Accuracy(%)</th>
+<th>GPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>CPU Inference Time (ms)<br/>[Normal Mode / High-Performance Mode]</th>
+<th>Model Storage Size (M)</th>
+<th>Introduction</th>
 </tr>
 <tr>
-<td>korean_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-korean_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/korean_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>korean_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/korean_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>60.21</td>
 <td>5.40 / 0.97</td>
 <td>9.11 / 4.05</td>
 <td>8.6 M</td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量韩文识别模型，支持韩文、数字识别</td>
+<td>The ultra-lightweight Korean recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Korean and numbers. </td>
 </tr>
 <tr>
-<td>japan_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-japan_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/japan_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>japan_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/japan_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>45.69</td>
 <td>5.70 / 1.02</td>
 <td>8.48 / 4.07</td>
 <td>8.8 M </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量日文识别模型，支持日文、数字识别</td>
+<td>The ultra-lightweight Japanese recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Japanese and numbers.</td>
 </tr>
 <tr>
-<td>chinese_cht_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-chinese_cht_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/chinese_cht_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>chinese_cht_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/chinese_cht_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>82.06</td>
 <td>5.90 / 1.28</td>
 <td>9.28 / 4.34</td>
 <td>9.7 M </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量繁体中文识别模型，支持繁体中文、数字识别</td>
+<td>The ultra-lightweight Traditional Chinese recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Traditional Chinese and numbers.</td>
 </tr>
 <tr>
-<td>te_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-te_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/te_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>te_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/te_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>95.88</td>
 <td>5.42 / 0.82</td>
 <td>8.10 / 6.91</td>
 <td>7.8 M </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量泰卢固文识别模型，支持泰卢固文、数字识别</td>
+<td>The ultra-lightweight Telugu recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Telugu and numbers.</td>
 </tr>
 <tr>
-<td>ka_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-ka_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/ka_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>ka_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/ka_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>96.96</td>
 <td>5.25 / 0.79</td>
 <td>9.09 / 3.86</td>
 <td>8.0 M </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量卡纳达文识别模型，支持卡纳达文、数字识别</td>
+<td>The ultra-lightweight Kannada recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Kannada and numbers.</td>
 </tr>
 <tr>
-<td>ta_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-ta_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/ta_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>ta_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/ta_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>76.83</td>
 <td>5.23 / 0.75</td>
 <td>10.13 / 4.30</td>
 <td>8.0 M </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量泰米尔文识别模型，支持泰米尔文、数字识别</td>
+<td>The ultra-lightweight Tamil recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Tamil and numbers.</td>
 </tr>
 <tr>
-<td>latin_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-latin_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/latin_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>latin_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/latin_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>76.93</td>
 <td>5.20 / 0.79</td>
 <td>8.83 / 7.15</td>
 <td>7.8 M</td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量拉丁文识别模型，支持拉丁文、数字识别</td>
+<td>The ultra-lightweight Latin recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Latin script and numbers.</td>
 </tr>
 <tr>
-<td>arabic_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-arabic_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/arabic_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>arabic_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/arabic_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>73.55</td>
 <td>5.35 / 0.79</td>
 <td>8.80 / 4.56</td>
 <td>7.8 M</td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量阿拉伯字母识别模型，支持阿拉伯字母、数字识别</td>
+<td>The ultra-lightweight Arabic script recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Arabic script and numbers.</td>
 </tr>
 <tr>
-<td>cyrillic_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-cyrillic_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/cyrillic_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>cyrillic_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/cyrillic_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>94.28</td>
 <td>5.23 / 0.76</td>
 <td>8.89 / 3.88</td>
 <td>7.9 M  </td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量斯拉夫字母识别模型，支持斯拉夫字母、数字识别</td>
+<td>
+The ultra-lightweight cyrillic alphabet recognition model trained based on the PP-OCRv3 recognition model supports the recognition of cyrillic letters and numbers.</td>
 </tr>
 <tr>
-<td>devanagari_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/\
-devanagari_PP-OCRv3_mobile_rec_infer.tar">推理模型</a>/<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_pretrained_model/devanagari_PP-OCRv3_mobile_rec_pretrained.pdparams">训练模型</a></td>
+<td>devanagari_PP-OCRv3_mobile_rec</td><td><a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/devanagari_PP-OCRv3_mobile_rec_infer.tar">Inference Model</a>/<a href="">Training Model</a></td>
 <td>96.44</td>
 <td>5.22 / 0.79</td>
 <td>8.56 / 4.06</td>
-<td>7.9 M</td>
-<td>基于PP-OCRv3识别模型训练得到的超轻量梵文字母识别模型，支持梵文字母、数字识别</td>
+<td>7.9 M  </td>
+<td>The ultra-lightweight Devanagari script recognition model trained based on the PP-OCRv3 recognition model supports the recognition of Devanagari script and numbers.</td>
 </tr>
 </table>
 </details>
-</details>
 
-<details>
-<summary> <b>测试环境说明：</b></summary>
-
-  <ul>
-      <li><b>性能测试环境</b>
+<p><strong>Test Environment Description:</strong></p>
+<ul>
+      <li><b>Performance Test Environment</b>
           <ul>
-            <li><strong>测试数据集：
-             </strong>
-                <ul>
-                  <li>文档图像方向分类模型：PaddleX 自建的数据集，覆盖证件和文档等多个场景，包含 1000 张图片。</li>
-                  <li>文本图像矫正模型：<a href="https://www3.cs.stonybrook.edu/~cvl/docunet.html">DocUNet</a>。</li>
-                   <li>版面区域检测模型：PaddleOCR 自建的版面区域检测数据集，包含中英文论文、杂志、合同、书本、试卷和研报等常见的 500 张文档类型图片。</li>
-                    <li>3类版面检测模型：PaddleOCR 自建的版面区域检测数据集，包含中英文论文、杂志和研报等常见的 1154 张文档类型图片。</li>
-                  <li> 17类区域检测模型：PaddleOCR 自建的版面区域检测数据集，包含中英文论文、杂志和研报等常见的 892 张文档类型图片。</li>
-                  <li>文本检测模型：PaddleOCR 自建的中文数据集，覆盖街景、网图、文档、手写多个场景，其中检测包含 500 张图片。</li>
-                   <li>中文识别模型： PaddleOCR 自建的中文数据集，覆盖街景、网图、文档、手写多个场景，其中文本识别包含 1.1w 张图片。</li>
-                    <li>ch_SVTRv2_rec：<a href="https://aistudio.baidu.com/competition/detail/1131/0/introduction">PaddleOCR算法模型挑战赛 - 赛题一：OCR端到端识别任务</a>A榜评估集。</li>
-                  <li>ch_RepSVTR_rec：<a href="https://aistudio.baidu.com/competition/detail/1131/0/introduction">PaddleOCR算法模型挑战赛 - 赛题一：OCR端到端识别任务</a>B榜评估集。</li>
-                  <li>英文识别模型：PaddleX 自建的英文数据集。</li>
-                   <li>多语言识别模型：PaddleX 自建的多语种数据集。</li>
-                    <li>文本行方向分类模型：PaddleX 自建的数据集，覆盖证件和文档等多个场景，包含 1000 张图片。</li>
-                   <li>印章文本检测模型：PaddleX 自建的数据集，包含500张圆形印章图像。</li>
-                </ul>
-             </li>
-              <li><strong>硬件配置：</strong>
+            <li><strong>Test Dataset：</strong>
+                        <ul>
+                         <li>Document Image Orientation Classification Module: A self-built dataset using PaddleX, covering multiple scenarios such as ID cards and documents, containing 1000 images.</li>
+                          <li>Text Image Rectification Model: <a href="https://www3.cs.stonybrook.edu/~cvl/docunet.html">DocUNet</a></li>
+                          <li>Layout Detection Model: A self-built layout detection dataset using PaddleOCR, including 500 images of common document types such as Chinese and English papers, magazines, contracts, books, exam papers, and research reports.</li>
+                          <li>3-Category Layout Detection Model: A self-built layout detection dataset using PaddleOCR, containing 1154 images of common document types such as Chinese and English papers, magazines, and research reports.</li>
+                          <li>17-Category Region Detection Model: A self-built layout detection dataset using PaddleOCR, including 892 images of common document types such as Chinese and English papers, magazines, and research reports.</li>
+                          <li>Text Detection Model: A self-built Chinese dataset using PaddleOCR, covering multiple scenarios such as street scenes, web images, documents, and handwriting, with 500 images for detection.</li>
+                          <li> Chinese Recognition Model: A self-built Chinese dataset using PaddleOCR, covering multiple scenarios such as street scenes, web images, documents, and handwriting, with 11,000 images for text recognition.</li>
+                          <li>ch_SVTRv2_rec: Evaluation set A for "OCR End-to-End Recognition Task" in the <a href="https://aistudio.baidu.com/competition/detail/1131/0/introduction">PaddleOCR Algorithm Model Challenge</a></li>
+                          <li>ch_RepSVTR_rec: Evaluation set B for "OCR End-to-End Recognition Task" in the <a href="https://aistudio.baidu.com/competition/detail/1131/0/introduction">PaddleOCR Algorithm Model Challenge</a>.</li>
+                          <li>English Recognition Model: A self-built English dataset using PaddleX.</li>
+                          <li>Multilingual Recognition Model: A self-built multilingual dataset using PaddleX.</li>
+                          <li>Text Line Orientation Classification Model: A self-built dataset using PaddleX, covering various scenarios such as ID cards and documents, containing 1000 images.</li>
+                          <li>Seal Text Detection Model: A self-built dataset using PaddleX, containing 500 images of circular seal textures.</li>
+                        </ul>
+                </li>
+              <li><strong>Hardware Configuration：</strong>
                   <ul>
-                      <li>GPU：NVIDIA Tesla T4</li>
-                      <li>CPU：Intel Xeon Gold 6271C @ 2.60GHz</li>
-                      <li>其他环境：Ubuntu 20.04 / cuDNN 8.6 / TensorRT 8.5.2.2</li>
+                      <li>GPU: NVIDIA Tesla T4</li>
+                      <li>CPU: Intel Xeon Gold 6271C @ 2.60GHz</li>
+                      <li>Other Environments: Ubuntu 20.04 / cuDNN 8.6 / TensorRT 8.5.2.2</li>
                   </ul>
               </li>
           </ul>
       </li>
-      <li><b>推理模式说明</b></li>
+      <li><b>Inference Mode Description</b></li>
   </ul>
 
 <table border="1">
     <thead>
         <tr>
-            <th>模式</th>
-            <th>GPU配置</th>
-            <th>CPU配置</th>
-            <th>加速技术组合</th>
+            <th>Mode</th>
+            <th>GPU Configuration </th>
+            <th>CPU Configuration </th>
+            <th>Acceleration Technology Combination</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>常规模式</td>
-            <td>FP32精度 / 无TRT加速</td>
-            <td>FP32精度 / 8线程</td>
+            <td>Normal Mode</td>
+            <td>FP32 Precision / No TRT Acceleration</td>
+            <td>FP32 Precision / 8 Threads</td>
             <td>PaddleInference</td>
         </tr>
         <tr>
-            <td>高性能模式</td>
-            <td>选择先验精度类型和加速策略的最优组合</td>
-            <td>FP32精度 / 8线程</td>
-            <td>选择先验最优后端（Paddle/OpenVINO/TRT等）</td>
+            <td>High-Performance Mode</td>
+            <td>Optimal combination of pre-selected precision types and acceleration strategies</td>
+            <td>FP32 Precision / 8 Threads</td>
+            <td>Pre-selected optimal backend (Paddle/OpenVINO/TRT, etc.)</td>
         </tr>
     </tbody>
 </table>
-</details>
 
-<p><br />
-<b>如您更考虑模型精度，请选择精度较高的模型，如您更考虑模型推理速度，请选择推理速度较快的模型，如您更考虑模型存储大小，请选择存储大小较小的模型</b>。</p>
-<h2 id="2">2. 快速开始<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>在本地使用印章文本识别产线前，请确保您已经按照<a href="../ppocr/installation.md">安装教程</a>完成了wheel包安装。安装完成后，可以在本地使用命令行体验或 Python 集成。</p>
+<h2 id="2-quick-start">2. Quick Start<a class="headerlink" href="#2-quick-start" title="Permanent link">&para;</a></h2>
+<p>Before using the seal text recognition production line locally, please ensure that you have completed the installation of the wheel package according to the <a href="../ppocr/installation.md">installation tutorial</a>. Once the installation is complete, you can experience it locally via the command line or integrate it with Python.</p>
 <h3 id="21">2.1 命令行方式体验<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p>一行命令即可快速体验 seal_recognition 产线效果：</p>
+<p>You can quickly experience the seal_recognition production line effect with a single command:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>paddleocr<span class="w"> </span>seal_recognition<span class="w"> </span>-i<span class="w"> </span>https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/seal_text_det.png
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 通过 --use_doc_orientation_classify 指定是否使用文档方向分类模型</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Specify whether to use the document orientation classification model with --use_doc_orientation_classify</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>paddleocr<span class="w"> </span>seal_recognition<span class="w"> </span>-i<span class="w"> </span>./seal_text_det.png<span class="w"> </span>--use_doc_orientation_classify<span class="w"> </span>True
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 通过 --use_doc_unwarping 指定是否使用文本图像矫正模块</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Specify whether to use the text image correction module with --use_doc_unwarping.</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>paddleocr<span class="w"> </span>seal_recognition<span class="w"> </span>-i<span class="w"> </span>./seal_text_det.png<span class="w"> </span>--use_doc_unwarping<span class="w"> </span>True
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># 通过 --device 指定模型推理时使用 GPU</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Use --device to specify the use of GPU for model inference.</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>paddleocr<span class="w"> </span>seal_recognition<span class="w"> </span>-i<span class="w"> </span>./seal_text_det.png<span class="w"> </span>--device<span class="w"> </span>gpu
 </span></code></pre></div>
-<details><summary><b>命令行支持更多参数设置，点击展开以查看命令行参数的详细说明</b></summary>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>参数说明</th>
-<th>参数类型</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>doc_orientation_classify_model_name</code></td>
-<td>文档方向分类模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>doc_orientation_classify_model_dir</code></td>
-<td>文档方向分类模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>doc_unwarping_model_name</code></td>
-<td>文本图像矫正模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>doc_unwarping_model_dir</code></td>
-<td>文本图像矫正模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_detection_model_name</code></td>
-<td>版面检测模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_detection_model_dir</code></td>
-<td>版面检测模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_text_detection_model_name</code></td>
-<td>印章文本检测模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_text_detection_model_dir</code></td>
-<td>印章文本检测模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>text_recognition_model_name</code></td>
-<td>文本识别模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>text_recognition_model_dir</code></td>
-<td>文本识别模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>text_recognition_batch_size</code></td>
-<td>文本识别模型的批处理大小。如果设置为<code>None</code>, 将默认设置批处理大小为<code>1</code>。</td>
-<td><code>int</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_doc_orientation_classify</code></td>
-<td>是否加载文档方向分类模块。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_doc_unwarping</code></td>
-<td>是否加载文本图像矫正模块。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_layout_detection</code></td>
-<td>是否加载版面检测模块。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_threshold</code></td>
-<td>版面检测置信度阈值，得分大于该阈值才会被输出。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>dict</b>：key是int类别id， value是大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.5</code></li></li></li></ul>
-</td>
-<td><code>float|dict</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_nms</code></td>
-<td>版面检测是否使用后处理NMS。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_unclip_ratio</code></td>
-<td>检测框的边长缩放倍数。
-<ul>
-<li><b>float</b>, 大于0的浮点数，如 1.1 , 表示将模型输出的检测框中心不变，宽和高都扩张1.1倍</li>
-<li><b>列表</b>, 如 [1.2, 1.5] , 表示将模型输出的检测框中心不变，宽度扩张1.2倍，高度扩张1.5倍</li>
-<li><b>None</b>：如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为1.0</li>
-</ul>
-</td>
-<td><code>float|list</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_merge_bboxes_mode</code></td>
-<td>版面检测中模型输出的检测框的合并处理模式。
-<ul>
-<li><b>large</b>, 设置为large时，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留外部最大的框，删除重叠的内部框。</li>
-<li><b>small</b>, 设置为small，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留内部被包含的小框，删除重叠的外部框。</li>
-<li><b>union</b>, 不进行框的过滤处理，内外框都保留</li>
-<li><b>None</b>：如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>large</code></li>
-</ul>
-</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_limit_side_len</code></td>
-<td>印章文本检测的图像边长限制。
-<ul>
-<li><b>int</b>：大于 <code>0</code> 的任意整数；</li>
-<li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值，初始化为 <code>736</code>；</li>
-</ul>
-</td>
-<td><code>int</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_limit_type</code></td>
-<td>印章文本检测的图像边长限制类型。
-<ul>
-<li><b>str</b>：支持 <code>min</code> 和 <code>max</code>，<code>min</code> 表示保证图像最短边不小于 <code>det_limit_side_len</code>，<code>max</code> 表示保证图像最长边不大于 <code>limit_side_len</code></li>
-<li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值，初始化为 <code>min</code>；</li>
-</ul>
-</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_thresh</code></td>
-<td>检测像素阈值，输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.2</code></li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_box_thresh</code></td>
-<td>检测框阈值，检测结果边框内，所有像素点的平均得分大于该阈值时，该结果会被认为是文字区域。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.6</code></li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_unclip_ratio</code></td>
-<td>印章文本检测扩张系数，使用该方法对文字区域进行扩张，该值越大，扩张的面积越大。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.5</code></li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_rec_score_thresh</code></td>
-<td>文本识别阈值，得分大于该阈值的文本结果会被保留。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.0</code>。即不设阈值</li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>input</code></td>
-<td>待预测数据，支持多种输入类型，必填。
-<ul>
-<li><b>Python Var</b>：如 <code>numpy.ndarray</code> 表示的图像数据</li>
-<li><b>str</b>：如图像文件或者PDF文件的本地路径：<code>/root/data/img.jpg</code>；<b>如URL链接</b>，如图像文件或PDF文件的网络URL：<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/general_doc_preprocessor_002.png">示例</a>；<b>如本地目录</b>，该目录下需包含待预测图像，如本地路径：<code>/root/data/</code>(当前不支持目录中包含PDF文件的预测，PDF文件需要指定到具体文件路径)</li>
-<li><b>List</b>：列表元素需为上述类型数据，如<code>[numpy.ndarray, numpy.ndarray]</code>，<code>["/root/data/img1.jpg", "/root/data/img2.jpg"]</code>，<code>["/root/data1", "/root/data2"]</code></li>
-</ul>
-</td>
-<td><code>Python Var|str|list</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>save_path</code></td>
-<td>指定推理结果文件保存的路径。如果设置为<code>None</code>, 推理结果将不会保存到本地。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>device</code></td>
-<td>用于推理的设备。支持指定具体卡号。
-<ul>
-<li><b>CPU</b>：如 <code>cpu</code> 表示使用 CPU 进行推理；</li>
-<li><b>GPU</b>：如 <code>gpu:0</code> 表示使用第 1 块 GPU 进行推理；</li>
-<li><b>NPU</b>：如 <code>npu:0</code> 表示使用第 1 块 NPU 进行推理；</li>
-<li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
-<li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
-<li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
-<li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备；</li>
-</ul>
-</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>enable_hpi</code></td>
-<td>是否启用高性能推理。</td>
-<td><code>bool</code></td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>use_tensorrt</code></td>
-<td>是否使用 TensorRT 进行推理加速。</td>
-<td><code>bool</code></td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>min_subgraph_size</code></td>
-<td>最小子图大小，用于优化模型子图的计算。</td>
-<td><code>int</code></td>
-<td><code>3</code></td>
-</tr>
-<tr>
-<td><code>precision</code></td>
-<td>计算精度，如 fp32、fp16。</td>
-<td><code>str</code></td>
-<td><code>fp32</code></td>
-</tr>
-<tr>
-<td><code>enable_mkldnn</code></td>
-<td>是否启用 MKL-DNN 加速库。如果设置为<code>None</code>, 将默认启用。
-</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>cpu_threads</code></td>
-<td>在 CPU 上进行推理时使用的线程数。</td>
-<td><code>int</code></td>
-<td><code>8</code></td>
-</tr>
-</tbody>
-</table>
-</details>
-<p><br /></p>
-<p>运行结果会被打印到终端上，默认配置的 seal_recognition 产线的运行结果如下：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">{</span><span class="s1">&#39;res&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span><span class="s1">&#39;/root/.paddlex/predict_input/seal_text_det.png&#39;</span>,<span class="w"> </span><span class="s1">&#39;model_settings&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;use_doc_preprocessor&#39;</span>:<span class="w"> </span>True,<span class="w"> </span><span class="s1">&#39;use_layout_detection&#39;</span>:<span class="w"> </span>True<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;doc_preprocessor_res&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;page_index&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;model_settings&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;use_doc_orientation_classify&#39;</span>:<span class="w"> </span>True,<span class="w"> </span><span class="s1">&#39;use_doc_unwarping&#39;</span>:<span class="w"> </span>True<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;angle&#39;</span>:<span class="w"> </span><span class="m">0</span><span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;layout_det_res&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;page_index&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;boxes&#39;</span>:<span class="w"> </span><span class="o">[{</span><span class="s1">&#39;cls_id&#39;</span>:<span class="w"> </span><span class="m">16</span>,<span class="w"> </span><span class="s1">&#39;label&#39;</span>:<span class="w"> </span><span class="s1">&#39;seal&#39;</span>,<span class="w"> </span><span class="s1">&#39;score&#39;</span>:<span class="w"> </span><span class="m">0</span>.9700419902801514,<span class="w"> </span><span class="s1">&#39;coordinate&#39;</span>:<span class="w"> </span><span class="o">[</span><span class="m">0</span>.7737427,<span class="w"> </span><span class="m">2</span>.4994812,<span class="w"> </span><span class="m">639</span>.28375,<span class="w"> </span><span class="m">640</span><span class="o">]}]}</span>,<span class="w"> </span><span class="s1">&#39;seal_res_list&#39;</span>:<span class="w"> </span><span class="o">[{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;page_index&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;model_settings&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;use_doc_preprocessor&#39;</span>:<span class="w"> </span>False,<span class="w"> </span><span class="s1">&#39;use_textline_orientation&#39;</span>:<span class="w"> </span>False<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;dt_polys&#39;</span>:<span class="w"> </span><span class="o">[</span>array<span class="o">([[</span><span class="m">433</span>,<span class="w">  </span><span class="m">32</span><span class="o">]</span>,
+<p>After running, the results will be printed to the terminal, as follows:</p>
+<details><summary> 👉Click to Expand</summary>
+
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">{</span><span class="s1">&#39;res&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span><span class="s1">&#39;seal_text_det.png&#39;</span>,<span class="w"> </span><span class="s1">&#39;model_settings&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;use_doc_preprocessor&#39;</span>:<span class="w"> </span>False,<span class="w"> </span><span class="s1">&#39;use_layout_detection&#39;</span>:<span class="w"> </span>True<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;layout_det_res&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;page_index&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;boxes&#39;</span>:<span class="w"> </span><span class="o">[{</span><span class="s1">&#39;cls_id&#39;</span>:<span class="w"> </span><span class="m">16</span>,<span class="w"> </span><span class="s1">&#39;label&#39;</span>:<span class="w"> </span><span class="s1">&#39;seal&#39;</span>,<span class="w"> </span><span class="s1">&#39;score&#39;</span>:<span class="w"> </span><span class="m">0</span>.975531280040741,<span class="w"> </span><span class="s1">&#39;coordinate&#39;</span>:<span class="w"> </span><span class="o">[</span><span class="m">6</span>.195526,<span class="w"> </span><span class="m">0</span>.1579895,<span class="w"> </span><span class="m">634</span>.3982,<span class="w"> </span><span class="m">628</span>.84595<span class="o">]}]}</span>,<span class="w"> </span><span class="s1">&#39;seal_res_list&#39;</span>:<span class="w"> </span><span class="o">[{</span><span class="s1">&#39;input_path&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;page_index&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;model_settings&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;use_doc_preprocessor&#39;</span>:<span class="w"> </span>False,<span class="w"> </span><span class="s1">&#39;use_textline_orientation&#39;</span>:<span class="w"> </span>False<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;dt_polys&#39;</span>:<span class="w"> </span><span class="o">[</span>array<span class="o">([[</span><span class="m">320</span>,<span class="w">  </span><span class="m">38</span><span class="o">]</span>,
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">       </span>...,
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">       </span><span class="o">[</span><span class="m">323</span>,<span class="w">  </span><span class="m">27</span><span class="o">]])]</span>,<span class="w"> </span><span class="s1">&#39;text_det_params&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;limit_side_len&#39;</span>:<span class="w"> </span><span class="m">736</span>,<span class="w"> </span><span class="s1">&#39;limit_type&#39;</span>:<span class="w"> </span><span class="s1">&#39;min&#39;</span>,<span class="w"> </span><span class="s1">&#39;thresh&#39;</span>:<span class="w"> </span><span class="m">0</span>.2,<span class="w"> </span><span class="s1">&#39;box_thresh&#39;</span>:<span class="w"> </span><span class="m">0</span>.6,<span class="w"> </span><span class="s1">&#39;unclip_ratio&#39;</span>:<span class="w"> </span><span class="m">0</span>.5<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;text_type&#39;</span>:<span class="w"> </span><span class="s1">&#39;seal&#39;</span>,<span class="w"> </span><span class="s1">&#39;textline_orientation_angles&#39;</span>:<span class="w"> </span>array<span class="o">([</span>-1<span class="o">])</span>,<span class="w"> </span><span class="s1">&#39;text_rec_score_thresh&#39;</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">&#39;rec_texts&#39;</span>:<span class="w"> </span><span class="o">[</span><span class="s1">&#39;天津君和缘商贸有限公司&#39;</span><span class="o">]</span>,<span class="w"> </span><span class="s1">&#39;rec_scores&#39;</span>:<span class="w"> </span>array<span class="o">([</span><span class="m">0</span>.99743599<span class="o">])</span>,<span class="w"> </span><span class="s1">&#39;rec_polys&#39;</span>:<span class="w"> </span><span class="o">[</span>array<span class="o">([[</span><span class="m">433</span>,<span class="w">  </span><span class="m">32</span><span class="o">]</span>,
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">       </span><span class="o">[</span><span class="m">315</span>,<span class="w">  </span><span class="m">38</span><span class="o">]])</span>,<span class="w"> </span>array<span class="o">([[</span><span class="m">461</span>,<span class="w"> </span><span class="m">347</span><span class="o">]</span>,
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">       </span>...,
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">       </span><span class="o">[</span><span class="m">323</span>,<span class="w">  </span><span class="m">27</span><span class="o">]])]</span>,<span class="w"> </span><span class="s1">&#39;rec_boxes&#39;</span>:<span class="w"> </span>array<span class="o">([]</span>,<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>float64<span class="o">)}]}}</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">       </span><span class="o">[</span><span class="m">456</span>,<span class="w"> </span><span class="m">346</span><span class="o">]])</span>,<span class="w"> </span>array<span class="o">([[</span><span class="m">439</span>,<span class="w"> </span><span class="m">445</span><span class="o">]</span>,
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">       </span>...,
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">       </span><span class="o">[</span><span class="m">434</span>,<span class="w"> </span><span class="m">444</span><span class="o">]])</span>,<span class="w"> </span>array<span class="o">([[</span><span class="m">158</span>,<span class="w"> </span><span class="m">468</span><span class="o">]</span>,
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">       </span>...,
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">       </span><span class="o">[</span><span class="m">154</span>,<span class="w"> </span><span class="m">466</span><span class="o">]])]</span>,<span class="w"> </span><span class="s1">&#39;text_det_params&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;limit_side_len&#39;</span>:<span class="w"> </span><span class="m">736</span>,<span class="w"> </span><span class="s1">&#39;limit_type&#39;</span>:<span class="w"> </span><span class="s1">&#39;min&#39;</span>,<span class="w"> </span><span class="s1">&#39;thresh&#39;</span>:<span class="w"> </span><span class="m">0</span>.2,<span class="w"> </span><span class="s1">&#39;box_thresh&#39;</span>:<span class="w"> </span><span class="m">0</span>.6,<span class="w"> </span><span class="s1">&#39;unclip_ratio&#39;</span>:<span class="w"> </span><span class="m">0</span>.5<span class="o">}</span>,<span class="w"> </span><span class="s1">&#39;text_type&#39;</span>:<span class="w"> </span><span class="s1">&#39;seal&#39;</span>,<span class="w"> </span><span class="s1">&#39;textline_orientation_angles&#39;</span>:<span class="w"> </span>array<span class="o">([</span>-1,<span class="w"> </span>...,<span class="w"> </span>-1<span class="o">])</span>,<span class="w"> </span><span class="s1">&#39;text_rec_score_thresh&#39;</span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">&#39;rec_texts&#39;</span>:<span class="w"> </span><span class="o">[</span><span class="s1">&#39;天津君和缘商贸有限公司&#39;</span>,<span class="w"> </span><span class="s1">&#39;发票专用章&#39;</span>,<span class="w"> </span><span class="s1">&#39;吗繁物&#39;</span>,<span class="w"> </span><span class="s1">&#39;5263647368706&#39;</span><span class="o">]</span>,<span class="w"> </span><span class="s1">&#39;rec_scores&#39;</span>:<span class="w"> </span>array<span class="o">([</span><span class="m">0</span>.9934051<span class="w"> </span>,<span class="w"> </span>...,<span class="w"> </span><span class="m">0</span>.99139398<span class="o">])</span>,<span class="w"> </span><span class="s1">&#39;rec_polys&#39;</span>:<span class="w"> </span><span class="o">[</span>array<span class="o">([[</span><span class="m">320</span>,<span class="w">  </span><span class="m">38</span><span class="o">]</span>,
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">       </span>...,
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">       </span><span class="o">[</span><span class="m">315</span>,<span class="w">  </span><span class="m">38</span><span class="o">]])</span>,<span class="w"> </span>array<span class="o">([[</span><span class="m">461</span>,<span class="w"> </span><span class="m">347</span><span class="o">]</span>,
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">       </span>...,
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">       </span><span class="o">[</span><span class="m">456</span>,<span class="w"> </span><span class="m">346</span><span class="o">]])</span>,<span class="w"> </span>array<span class="o">([[</span><span class="m">439</span>,<span class="w"> </span><span class="m">445</span><span class="o">]</span>,
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">       </span>...,
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">       </span><span class="o">[</span><span class="m">434</span>,<span class="w"> </span><span class="m">444</span><span class="o">]])</span>,<span class="w"> </span>array<span class="o">([[</span><span class="m">158</span>,<span class="w"> </span><span class="m">468</span><span class="o">]</span>,
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">       </span>...,
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">       </span><span class="o">[</span><span class="m">154</span>,<span class="w"> </span><span class="m">466</span><span class="o">]])]</span>,<span class="w"> </span><span class="s1">&#39;rec_boxes&#39;</span>:<span class="w"> </span>array<span class="o">([]</span>,<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>float64<span class="o">)}]}}</span>
 </span></code></pre></div>
-<p>可视化结果保存在<code>save_path</code>下，其中印章OCR的可视化结果如下：</p>
+
+</details>
+
+<p>The explanation of the result parameters can be found in <a href="#212-python-script-integration">2.1.2 Python Script Integration</a>.</p>
+<p>The visualized results are saved under <code>save_path</code>, and the visualized result of seal OCR is as follows:</p>
 <p><img src="https://raw.githubusercontent.com/cuicheng01/PaddleX_doc_images/main/images/pipelines/seal_recognition/03.png"/></p>
-<h3 id="22-python">2.2 Python脚本方式集成<a class="headerlink" href="#22-python" title="Permanent link">&para;</a></h3>
-<p>命令行方式是为了快速体验查看效果，一般来说，在项目中，往往需要通过代码集成，您可以通过几行代码即可完成产线的快速推理，推理代码如下：</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">paddleocr</span><span class="w"> </span><span class="kn">import</span> <span class="n">SealRecognition</span>
+<h4 id="222-python-script-integration">2.2.2 Python Script Integration<a class="headerlink" href="#222-python-script-integration" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The above command line is for quickly experiencing and viewing the effect. Generally, in a project, you often need to integrate through code. You can complete the quick inference of the pipeline with just a few lines of code. The inference code is as follows:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">paddlex</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_pipeline</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">pipeline</span> <span class="o">=</span> <span class="n">SealRecognition</span><span class="p">()</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># ocr = TableRecognitionPipelineV2(use_doc_orientation_classify=True) # 通过 use_doc_orientation_classify 指定是否使用文档方向分类模型</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># ocr = TableRecognitionPipelineV2(use_doc_unwarping=True) # 通过 use_doc_unwarping 指定是否使用文本图像矫正模块</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># ocr = TableRecognitionPipelineV2(device=&quot;gpu&quot;) # 通过 device 指定模型推理时使用 GPU</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">output</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;./seal_text_det.png&quot;</span><span class="p">)</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">res</span><span class="o">.</span><span class="n">print</span><span class="p">()</span> <span class="c1">## 打印预测的结构化输出</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">res</span><span class="o">.</span><span class="n">save_to_img</span><span class="p">(</span><span class="s2">&quot;./output/&quot;</span><span class="p">)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">res</span><span class="o">.</span><span class="n">save_to_json</span><span class="p">(</span><span class="s2">&quot;./output/&quot;</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">pipeline</span> <span class="o">=</span> <span class="n">create_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="o">=</span><span class="s2">&quot;seal_recognition&quot;</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">output</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;seal_text_det.png&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">use_doc_orientation_classify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">use_doc_unwarping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">res</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">res</span><span class="o">.</span><span class="n">save_to_img</span><span class="p">(</span><span class="s2">&quot;./output/&quot;</span><span class="p">)</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">res</span><span class="o">.</span><span class="n">save_to_json</span><span class="p">(</span><span class="s2">&quot;./output/&quot;</span><span class="p">)</span>
 </span></code></pre></div>
-<p>在上述 Python 脚本中，执行了如下几个步骤：</p>
-<p>（1）通过 <code>SealRecognition()</code> 实例化 印章文本识别 产线对象，具体参数说明如下：</p>
+<p>In the above Python script, the following steps were executed:</p>
+<p>(1) The seal recognition pipeline object was instantiated via <code>create_pipeline()</code>, with the specific parameters described as follows:</p>
 <table>
 <thead>
 <tr>
-<th>参数</th>
-<th>参数说明</th>
-<th>参数类型</th>
-<th>默认值</th>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Default Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>doc_orientation_classify_model_name</code></td>
-<td>文档方向分类模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
+<td><code>pipeline</code></td>
+<td>The name of the pipeline or the path to the pipeline configuration file. If it is a pipeline name, it must be supported by PaddleX.</td>
 <td><code>str</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
-<td><code>doc_orientation_classify_model_dir</code></td>
-<td>文档方向分类模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>doc_unwarping_model_name</code></td>
-<td>文本图像矫正模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>doc_unwarping_model_dir</code></td>
-<td>文本图像矫正模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_detection_model_name</code></td>
-<td>版面检测模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_detection_model_dir</code></td>
-<td>版面检测模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_text_detection_model_name</code></td>
-<td>印章文本检测模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_text_detection_model_dir</code></td>
-<td>印章文本检测模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>text_recognition_model_name</code></td>
-<td>文本识别模型的名称。如果设置为<code>None</code>, 将会使用产线默认模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>text_recognition_model_dir</code></td>
-<td>文本识别模型的目录路径。如果设置为<code>None</code>, 将会下载官方模型。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>text_recognition_batch_size</code></td>
-<td>文本识别模型的批处理大小。如果设置为<code>None</code>, 将默认设置批处理大小为<code>1</code>。</td>
-<td><code>int</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_doc_orientation_classify</code></td>
-<td>是否加载文档方向分类模块。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_doc_unwarping</code></td>
-<td>是否加载文本图像矫正模块。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_layout_detection</code></td>
-<td>是否加载版面检测模块。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_threshold</code></td>
-<td>版面检测置信度阈值，得分大于该阈值才会被输出。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>dict</b>：key是int类别id， value是大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.5</code></li></li></li></ul>
-</td>
-<td><code>float|dict</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_nms</code></td>
-<td>版面检测是否使用后处理NMS。如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>True</code>。</td>
-<td><code>bool</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_unclip_ratio</code></td>
-<td>检测框的边长缩放倍数。
-<ul>
-<li><b>float</b>, 大于0的浮点数，如 1.1 , 表示将模型输出的检测框中心不变，宽和高都扩张1.1倍</li>
-<li><b>列表</b>, 如 [1.2, 1.5] , 表示将模型输出的检测框中心不变，宽度扩张1.2倍，高度扩张1.5倍</li>
-<li><b>None</b>：如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为1.0</li>
-</ul>
-</td>
-<td><code>float|list</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>layout_merge_bboxes_mode</code></td>
-<td>版面检测中模型输出的检测框的合并处理模式。
-<ul>
-<li><b>large</b>, 设置为large时，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留外部最大的框，删除重叠的内部框。</li>
-<li><b>small</b>, 设置为small，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留内部被包含的小框，删除重叠的外部框。</li>
-<li><b>union</b>, 不进行框的过滤处理，内外框都保留</li>
-<li><b>None</b>：如果设置为<code>None</code>, 将默认使用产线初始化的该参数值，初始化为<code>large</code></li>
-</ul>
-</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_limit_side_len</code></td>
-<td>印章文本检测的图像边长限制。
-<ul>
-<li><b>int</b>：大于 <code>0</code> 的任意整数；</li>
-<li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值，初始化为 <code>736</code>；</li>
-</ul>
-</td>
-<td><code>int</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_limit_type</code></td>
-<td>印章文本检测的图像边长限制类型。
-<ul>
-<li><b>str</b>：支持 <code>min</code> 和 <code>max</code>，<code>min</code> 表示保证图像最短边不小于 <code>det_limit_side_len</code>，<code>max</code> 表示保证图像最长边不大于 <code>limit_side_len</code></li>
-<li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值，初始化为 <code>min</code>；</li>
-</ul>
-</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_thresh</code></td>
-<td>检测像素阈值，输出的概率图中，得分大于该阈值的像素点才会被认为是文字像素点。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.2</code></li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_box_thresh</code></td>
-<td>检测框阈值，检测结果边框内，所有像素点的平均得分大于该阈值时，该结果会被认为是文字区域。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.6</code></li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_unclip_ratio</code></td>
-<td>印章文本检测扩张系数，使用该方法对文字区域进行扩张，该值越大，扩张的面积越大。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.5</code></li></li></ul>
-</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_rec_score_thresh</code></td>
-<td>文本识别阈值，得分大于该阈值的文本结果会被保留。
-<ul>
-<li><b>float</b>：大于 <code>0</code> 的任意浮点数
-    <li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值 <code>0.0</code>。即不设阈值</li></li></ul>
-</td>
-<td><code>float</code></td>
+<td><code>config</code></td>
+<td>Specific configuration information for the pipeline (if set simultaneously with <code>pipeline</code>, it has higher priority than <code>pipeline</code>, and the pipeline name must be consistent with <code>pipeline</code>).</td>
+<td><code>dict[str, Any]</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>用于推理的设备。支持指定具体卡号。
-<ul>
-<li><b>CPU</b>：如 <code>cpu</code> 表示使用 CPU 进行推理；</li>
-<li><b>GPU</b>：如 <code>gpu:0</code> 表示使用第 1 块 GPU 进行推理；</li>
-<li><b>NPU</b>：如 <code>npu:0</code> 表示使用第 1 块 NPU 进行推理；</li>
-<li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
-<li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
-<li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
-<li><b>None</b>：如果设置为 <code>None</code>, 将默认使用产线初始化的该参数值，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备；</li>
-</ul>
-</td>
+<td>The device used for pipeline inference. It supports specifying the specific card number of the GPU, such as "gpu:0", other hardware card numbers, such as "npu:0", or CPU, such as "cpu". Supports specifying multiple devices simultaneously for parallel inference. For details, please refer to <a href="../../instructions/parallel_inference.en.md#specifying-multiple-inference-devices">Pipeline Parallel Inference</a>.</td>
 <td><code>str</code></td>
+<td><code>gpu:0</code></td>
+</tr>
+<tr>
+<td><code>use_hpip</code></td>
+<td>Whether to enable the high-performance inference plugin. If set to <code>None</code>, the setting from the configuration file or <code>config</code> will be used.</td>
+<td><code>bool</code></td>
+<td>None</td>
 <td><code>None</code></td>
 </tr>
 <tr>
-<td><code>enable_hpi</code></td>
-<td>是否启用高性能推理。</td>
-<td><code>bool</code></td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>use_tensorrt</code></td>
-<td>是否使用 TensorRT 进行推理加速。</td>
-<td><code>bool</code></td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>min_subgraph_size</code></td>
-<td>最小子图大小，用于优化模型子图的计算。</td>
-<td><code>int</code></td>
-<td><code>3</code></td>
-</tr>
-<tr>
-<td><code>precision</code></td>
-<td>计算精度，如 fp32、fp16。</td>
-<td><code>str</code></td>
-<td><code>fp32</code></td>
-</tr>
-<tr>
-<td><code>enable_mkldnn</code></td>
-<td>是否启用 MKL-DNN 加速库。如果设置为<code>None</code>, 将默认启用。
-</td>
-<td><code>bool</code></td>
+<td><code>hpi_config</code></td>
+<td>High-performance inference configuration</td>
+<td><code>dict</code> | <code>None</code></td>
+<td>None</td>
 <td><code>None</code></td>
-</tr>
-<tr>
-<td><code>cpu_threads</code></td>
-<td>在 CPU 上进行推理时使用的线程数。</td>
-<td><code>int</code></td>
-<td><code>8</code></td>
 </tr>
 </tbody>
 </table>
 
-<p>（2）调用 印章文本识别 产线对象的 <code>predict()</code> 方法进行推理预测，该方法会返回一个结果列表。</p>
-<p>另外，产线还提供了 <code>predict_iter()</code> 方法。两者在参数接受和结果返回方面是完全一致的，区别在于 <code>predict_iter()</code> 返回的是一个 <code>generator</code>，能够逐步处理和获取预测结果，适合处理大型数据集或希望节省内存的场景。可以根据实际需求选择使用这两种方法中的任意一种。</p>
-<p>以下是 <code>predict()</code> 方法的参数及其说明：</p>
+<p>(2) Call the <code>predict()</code> method of the Seal Text Recognition pipeline object for inference prediction. This method will return a <code>generator</code>. Below are the parameters and their descriptions for the <code>predict()</code> method:</p>
 <table>
 <thead>
 <tr>
-<th>参数</th>
-<th>参数说明</th>
-<th>参数类型</th>
-<th>默认值</th>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Options</th>
+<th>Default Value</th>
 </tr>
 </thead>
 <tr>
 <td><code>input</code></td>
-<td>待预测数据，支持多种输入类型，必填。
+<td>Data to be predicted, supports multiple input types (required)</td>
+<td><code>Python Var|str|list</code></td>
+<td>
 <ul>
-<li><b>Python Var</b>：如 <code>numpy.ndarray</code> 表示的图像数据</li>
-<li><b>str</b>：如图像文件或者PDF文件的本地路径：<code>/root/data/img.jpg</code>；<b>如URL链接</b>，如图像文件或PDF文件的网络URL：<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/seal_text_det.png">示例</a>；<b>如本地目录</b>，该目录下需包含待预测图像，如本地路径：<code>/root/data/</code>(当前不支持目录中包含PDF文件的预测，PDF文件需要指定到具体文件路径)</li>
-<li><b>List</b>：列表元素需为上述类型数据，如<code>[numpy.ndarray, numpy.ndarray]</code>，<code>["/root/data/img1.jpg", "/root/data/img2.jpg"]</code>，<code>["/root/data1", "/root/data2"]</code></li>
+<li><b>Python Var</b>: Image data represented by <code>numpy.ndarray</code></li>
+<li><b>str</b>: Local path of an image or PDF file, e.g., <code>/root/data/img.jpg</code>; <b>URL link</b>, e.g., the network URL of an image or PDF file: <a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/seal_text_det.png">Example</a>; <b>Local directory</b>, containing images to be predicted, e.g., <code>/root/data/</code> (currently does not support prediction of PDF files in directories; PDF files must be specified with an exact file path)</li>
+<li><b>List</b>: Elements of the list must be of the above types, e.g., <code>[numpy.ndarray, numpy.ndarray]</code>, <code>[\"/root/data/img1.jpg\", \"/root/data/img2.jpg\"]</code>, <code>[\"/root/data1\", \"/root/data2\"]</code></li>
 </ul>
 </td>
-<td><code>Python Var|str|list</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>str</code></td>
+<td>Inference device for the pipeline</td>
+<td><code>str|None</code></td>
+<td>
+<ul>
+<li><b>CPU</b>: e.g., <code>cpu</code> for CPU inference;</li>
+<li><b>GPU</b>: e.g., <code>gpu:0</code> for inference using the first GPU;</li>
+<li><b>NPU</b>: e.g., <code>npu:0</code> for inference using the first NPU;</li>
+<li><b>XPU</b>: e.g., <code>xpu:0</code> for inference using the first XPU;</li>
+<li><b>MLU</b>: e.g., <code>mlu:0</code> for inference using the first MLU;</li>
+<li><b>DCU</b>: e.g., <code>dcu:0</code> for inference using the first DCU;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used. During initialization, the local GPU device 0 will be prioritized; if unavailable, the CPU device will be used.</li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>是否在推理时使用文档方向分类模块。</td>
-<td><code>bool</code></td>
+<td>Whether to use the document orientation classification module</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>是否在推理时使用文本图像矫正模块。</td>
-<td><code>bool</code></td>
+<td>Whether to use the document unwarping module</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>是否在推理时使用版面检测模块。</td>
-<td><code>bool</code></td>
+<td>Whether to use the layout detection module</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>float|dict</code></td>
+<td>Confidence threshold for layout detection; only scores above this threshold will be output</td>
+<td><code>float|dict|None</code></td>
+<td>
+<ul>
+<li><b>float</b>: Any float greater than <code>0</code></li>
+<li><b>dict</b>: Key is the int category ID, value is any float greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>0.5</code></li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>bool</code></td>
+<td>Whether to use Non-Maximum Suppression (NMS) for layout detection post-processing</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
+<td>Expansion ratio of detection box edges; if not specified, the default value from the PaddleX official model configuration will be used</td>
+<td><code>float|list|None</code></td>
+<td>
+<ul>
+<li><b>float</b>: Any float greater than 0, e.g., 1.1, which means expanding the width and height of the detection box by 1.1 times while keeping the center unchanged</li>
+<li><b>list</b>: e.g., [1.2, 1.5], which means expanding the width of the detection box by 1.2 times and the height by 1.5 times while keeping the center unchanged</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as 1.0</li>
+</ul>
+</td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>string</code></td>
-<td><code>None</code></td>
+<td>Merging mode for detection boxes in layout detection output; if not specified, the default value from the PaddleX official model configuration will be used</td>
+<td><code>string|None</code></td>
+<td>
+<ul>
+<li><b>large</b>: When set to <code>large</code>, only the largest external box will be retained for overlapping detection boxes, and the internal overlapping boxes will be removed.</li>
+<li><b>small</b>: When set to <code>small</code>, only the smallest internal box will be retained for overlapping detection boxes, and the external overlapping boxes will be removed.</li>
+<li><b>union</b>: No filtering of boxes will be performed; both internal and external boxes will be retained.</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>large</code>.</li>
+</ul>
+</td>
+<td>None</td>
 </tr>
 <tr>
 <td><code>seal_det_limit_side_len</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>int</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_limit_type</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>str</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_thresh</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_box_thresh</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>float</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>seal_det_unclip_ratio</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>float</code></td>
+<td>Side length limit for seal text detection</td>
+<td><code>int|None</code></td>
+<td>
+<ul>
+<li><b>int</b>: Any integer greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>736</code></li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>seal_rec_score_thresh</code></td>
-<td>与实例化时的参数相同。</td>
-<td><code>float</code></td>
+<td>Text recognition threshold; text results with scores above this threshold will be retained</td>
+<td><code>float|None</code></td>
+<td>
+<ul>
+<li><b>float</b>: Any float greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>0.0</code>. This means no threshold is applied.</li>
+</ul>
+</td>
 <td><code>None</code></td>
 </tr>
-</tr></table>
+</table>
 
-<p>（3）对预测结果进行处理，每个样本的预测结果均为对应的Result对象，且支持打印、保存为图片、保存为<code>json</code>文件的操作:</p>
+<p>(3) Process the prediction results. The prediction result for each sample is of <code>dict</code> type and supports operations such as printing, saving as an image, and saving as a <code>json</code> file:</p>
 <table>
 <thead>
 <tr>
-<th>方法</th>
-<th>方法说明</th>
-<th>参数</th>
-<th>参数类型</th>
-<th>参数说明</th>
-<th>默认值</th>
+<th>Method</th>
+<th>Description</th>
+<th>Parameter</th>
+<th>Parameter Type</th>
+<th>Parameter Description</th>
+<th>Default Value</th>
 </tr>
 </thead>
 <tr>
 <td rowspan="3"><code>print()</code></td>
-<td rowspan="3">打印结果到终端</td>
+<td rowspan="3">Print results to the terminal</td>
 <td><code>format_json</code></td>
 <td><code>bool</code></td>
-<td>是否对输出内容进行使用 <code>JSON</code> 缩进格式化</td>
+<td>Whether to format the output content using <code>JSON</code> indentation</td>
 <td><code>True</code></td>
 </tr>
 <tr>
 <td><code>indent</code></td>
 <td><code>int</code></td>
-<td>指定缩进级别，以美化输出的 <code>JSON</code> 数据，使其更具可读性，仅当 <code>format_json</code> 为 <code>True</code> 时有效</td>
+<td>Specify the indentation level to beautify the output <code>JSON</code> data for better readability, effective only when <code>format_json</code> is <code>True</code></td>
 <td>4</td>
 </tr>
 <tr>
 <td><code>ensure_ascii</code></td>
 <td><code>bool</code></td>
-<td>控制是否将非 <code>ASCII</code> 字符转义为 <code>Unicode</code>。设置为 <code>True</code> 时，所有非 <code>ASCII</code> 字符将被转义；<code>False</code> 则保留原始字符，仅当<code>format_json</code>为<code>True</code>时有效</td>
+<td>Control whether to escape non-<code>ASCII</code> characters to <code>Unicode</code>. When set to <code>True</code>, all non-<code>ASCII</code> characters will be escaped; <code>False</code> will retain the original characters, effective only when <code>format_json</code> is <code>True</code></td>
 <td><code>False</code></td>
 </tr>
 <tr>
 <td rowspan="3"><code>save_to_json()</code></td>
-<td rowspan="3">将结果保存为json格式的文件</td>
+<td rowspan="3">Save results as a json file</td>
 <td><code>save_path</code></td>
 <td><code>str</code></td>
-<td>保存的文件路径，当为目录时，保存文件命名与输入文件类型命名一致</td>
-<td>无</td>
+<td>The file path to save the results. When it is a directory, the saved file name will be consistent with the input file type</td>
+<td>None</td>
 </tr>
 <tr>
 <td><code>indent</code></td>
 <td><code>int</code></td>
-<td>指定缩进级别，以美化输出的 <code>JSON</code> 数据，使其更具可读性，仅当 <code>format_json</code> 为 <code>True</code> 时有效</td>
+<td>Specify the indentation level to beautify the output <code>JSON</code> data for better readability, effective only when <code>format_json</code> is <code>True</code></td>
 <td>4</td>
 </tr>
 <tr>
 <td><code>ensure_ascii</code></td>
 <td><code>bool</code></td>
-<td>控制是否将非 <code>ASCII</code> 字符转义为 <code>Unicode</code>。设置为 <code>True</code> 时，所有非 <code>ASCII</code> 字符将被转义；<code>False</code> 则保留原始字符，仅当<code>format_json</code>为<code>True</code>时有效</td>
+<td>Control whether to escape non-<code>ASCII</code> characters to <code>Unicode</code>. When set to <code>True</code>, all non-<code>ASCII</code> characters will be escaped; <code>False</code> will retain the original characters, effective only when <code>format_json</code> is <code>True</code></td>
 <td><code>False</code></td>
 </tr>
 <tr>
 <td><code>save_to_img()</code></td>
-<td>将结果保存为图像格式的文件</td>
+<td>Save results as an image file</td>
 <td><code>save_path</code></td>
 <td><code>str</code></td>
-<td>保存的文件路径，支持目录或文件路径</td>
-<td>无</td>
+<td>The file path to save the results, supports directory or file path</td>
+<td>None</td>
 </tr>
 </table>
 
 <ul>
 <li>
-<p>调用<code>print()</code> 方法会将结果打印到终端，打印到终端的内容解释如下：</p>
+<p>Calling the <code>print()</code> method will print the results to the terminal, and the explanations of the printed content are as follows:</p>
 <ul>
 <li>
-<p><code>input_path</code>: <code>(str)</code> 待预测图像的输入路径</p>
+<p><code>input_path</code>: <code>(str)</code> The input path of the image to be predicted.</p>
 </li>
 <li>
-<p><code>page_index</code>: <code>(Union[int, None])</code> 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 <code>None</code></p>
-</li>
-<li>
-<p><code>model_settings</code>: <code>(Dict[str, bool])</code> 配置产线所需的模型参数</p>
+<p><code>model_settings</code>: <code>(Dict[str, bool])</code> The model parameters required for pipeline configuration.</p>
 <ul>
-<li><code>use_doc_preprocessor</code>: <code>(bool)</code> 控制是否启用文档预处理子产线</li>
-<li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面检测子模块<ul>
-<li><code>layout_det_res</code>: <code>(Dict[str, Union[List[numpy.ndarray], List[float]]])</code> 版面检测子模块的输出结果。仅当<code>use_layout_detection=True</code>时存在</li>
-</ul>
-</li>
-<li><code>input_path</code>: <code>(Union[str, None])</code> 版面检测区域模块接受的图像路径，当输入为<code>numpy.ndarray</code>时，保存为<code>None</code></li>
-<li><code>page_index</code>: <code>(Union[int, None])</code> 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 <code>None</code></li>
-<li><code>boxes</code>: <code>(List[Dict])</code> 版面印章区域的检测框列表，每个列表中的元素，包含以下字段<ul>
-<li><code>cls_id</code>: <code>(int)</code> 检测框的印章类别id</li>
-<li><code>score</code>: <code>(float)</code> 检测框的置信度</li>
-<li><code>coordinate</code>: <code>(List[float])</code> 检测框的四个顶点坐标，顺序为x1,y1,x2,y2表示左上角的x坐标，左上角的y坐标，右下角x坐标，右下角的y坐标</li>
-<li><code>seal_res_list</code>: <code>List[Dict]</code> 印章文本识别的结果列表，每个元素包含以下字段</li>
-</ul>
-</li>
-<li><code>input_path</code>: <code>(Union[str, None])</code> 印章文本识别产线接受的图像路径，当输入为<code>numpy.ndarray</code>时，保存为<code>None</code></li>
-<li><code>page_index</code>: <code>(Union[int, None])</code> 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 <code>None</code></li>
-<li><code>model_settings</code>: <code>(Dict[str, bool])</code> 印章文本识别产线的模型配置参数</li>
-<li><code>use_doc_preprocessor</code>: <code>(bool)</code> 控制是否启用文档预处理子产线</li>
-<li><code>use_textline_orientation</code>: <code>(bool)</code> 控制是否启用文本行方向分类子模块<ul>
-<li><code>doc_preprocessor_res</code>: <code>(Dict[str, Union[str, Dict[str, bool], int]])</code> 文档预处理子产线的输出结果。仅当<code>use_doc_preprocessor=True</code>时存在</li>
-</ul>
-</li>
-<li><code>input_path</code>: <code>(Union[str, None])</code> 图像预处理子产线接受的图像路径，当输入为<code>numpy.ndarray</code>时，保存为<code>None</code></li>
-<li><code>model_settings</code>: <code>(Dict)</code> 预处理子产线的模型配置参数<ul>
-<li><code>use_doc_orientation_classify</code>: <code>(bool)</code> 控制是否启用文档方向分类</li>
-<li><code>use_doc_unwarping</code>: <code>(bool)</code> 控制是否启用文本图像矫正</li>
-</ul>
-</li>
-<li><code>angle</code>: <code>(int)</code> 文档方向分类的预测结果。启用时取值为[0,1,2,3]，分别对应[0°,90°,180°,270°]；未启用时为-1</li>
+<li><code>use_doc_preprocessor</code>: <code>(bool)</code> Controls whether to enable the document preprocessing sub-pipeline.</li>
+<li><code>use_layout_detection</code>: <code>(bool)</code> Controls whether to enable the layout detection sub-module.</li>
 </ul>
 </li>
 <li>
-<p><code>dt_polys</code>: <code>(List[numpy.ndarray])</code> 印章文本检测的多边形框列表。每个检测框由多个顶点坐标构成的numpy数组表示，数组shape为(n, 2)</p>
-</li>
-<li>
-<p><code>dt_scores</code>: <code>(List[float])</code> 文本检测框的置信度列表</p>
-</li>
-<li>
-<p><code>text_det_params</code>: <code>(Dict[str, Dict[str, int, float]])</code> 文本检测模块的配置参数</p>
+<p><code>layout_det_res</code>: <code>(Dict[str, Union[List[numpy.ndarray], List[float]]])</code> The output result of the layout detection sub-module. Only exists when <code>use_layout_detection=True</code>.</p>
 <ul>
-<li><code>limit_side_len</code>: <code>(int)</code> 图像预处理时的边长限制值</li>
-<li><code>limit_type</code>: <code>(str)</code> 边长限制的处理方式</li>
-<li><code>thresh</code>: <code>(float)</code> 文本像素分类的置信度阈值</li>
-<li><code>box_thresh</code>: <code>(float)</code> 文本检测框的置信度阈值</li>
-<li><code>unclip_ratio</code>: <code>(float)</code> 文本检测框的膨胀系数</li>
-<li><code>text_type</code>: <code>(str)</code> 印章文本检测的类型，当前固定为"seal"</li>
+<li><code>input_path</code>: <code>(Union[str, None])</code> The image path accepted by the layout detection module. Saved as <code>None</code> when the input is a <code>numpy.ndarray</code>.</li>
+<li><code>page_index</code>: <code>(Union[int, None])</code> Indicates the current page number of the PDF if the input is a PDF file; otherwise, it is <code>None</code>.</li>
+<li><code>boxes</code>: <code>(List[Dict])</code> A list of detected layout seal regions, with each element containing the following fields:<ul>
+<li><code>cls_id</code>: <code>(int)</code> The class ID of the detected seal region.</li>
+<li><code>score</code>: <code>(float)</code> The confidence score of the detected region.</li>
+<li><code>coordinate</code>: <code>(List[float])</code> The coordinates of the four corners of the detection box, in the order of x1, y1, x2, y2, representing the x-coordinate of the top-left corner, the y-coordinate of the top-left corner, the x-coordinate of the bottom-right corner, and the y-coordinate of the bottom-right corner.</li>
 </ul>
-</li>
-<li>
-<p><code>text_rec_score_thresh</code>: <code>(float)</code> 文本识别结果的过滤阈值</p>
-</li>
-<li>
-<p><code>rec_texts</code>: <code>(List[str])</code> 文本识别结果列表，仅包含置信度超过<code>text_rec_score_thresh</code>的文本</p>
-</li>
-<li>
-<p><code>rec_scores</code>: <code>(List[float])</code> 文本识别的置信度列表，已按<code>text_rec_score_thresh</code>过滤</p>
-</li>
-<li>
-<p><code>rec_polys</code>: <code>(List[numpy.ndarray])</code> 经过置信度过滤的文本检测框列表，格式同<code>dt_polys</code></p>
-</li>
-<li>
-<p><code>rec_boxes</code>: <code>(numpy.ndarray)</code> 检测框的矩形边界框数组，印章识别产线为空数组</p>
 </li>
 </ul>
 </li>
 <li>
-<p>调用<code>save_to_json()</code> 方法会将上述内容保存到指定的<code>save_path</code>中，如果指定为目录，则保存的路径为<code>save_path/{your_img_basename}_res.json</code>，如果指定为文件，则直接保存到该文件中。由于json文件不支持保存numpy数组，因此会将其中的<code>numpy.array</code>类型转换为列表形式。</p>
+<p><code>seal_res_list</code>: <code>List[Dict]</code> A list of seal text recognition results, with each element containing the following fields:</p>
+<ul>
+<li><code>input_path</code>: <code>(Union[str, None])</code> The image path accepted by the seal text recognition pipeline. Saved as <code>None</code> when the input is a <code>numpy.ndarray</code>.</li>
+<li><code>page_index</code>: <code>(Union[int, None])</code> Indicates the current page number of the PDF if the input is a PDF file; otherwise, it is <code>None</code>.</li>
+<li><code>model_settings</code>: <code>(Dict[str, bool])</code> The model configuration parameters for the seal text recognition pipeline.</li>
+<li><code>use_doc_preprocessor</code>: <code>(bool)</code> Controls whether to enable the document preprocessing sub-pipeline.</li>
+<li><code>use_textline_orientation</code>: <code>(bool)</code> Controls whether to enable the text line orientation classification sub-module.</li>
+</ul>
 </li>
 <li>
-<p>调用<code>save_to_img()</code> 方法会将可视化结果保存到指定的<code>save_path</code>中，如果指定为目录，则保存的路径为<code>save_path/{your_img_basename}_seal_res_region1.{your_img_extension}</code>，如果指定为文件，则直接保存到该文件中。(产线通常包含较多结果图片，不建议直接指定为具体的文件路径，否则多张图会被覆盖，仅保留最后一张图)</p>
+<p><code>doc_preprocessor_res</code>: <code>(Dict[str, Union[str, Dict[str, bool], int]])</code> The output result of the document preprocessing sub-pipeline. Only exists when <code>use_doc_preprocessor=True</code>.</p>
+<ul>
+<li><code>input_path</code>: <code>(Union[str, None])</code> The image path accepted by the document preprocessing sub-pipeline. Saved as <code>None</code> when the input is a <code>numpy.ndarray</code>.</li>
+<li><code>model_settings</code>: <code>(Dict)</code> The model configuration parameters for the preprocessing sub-pipeline.<ul>
+<li><code>use_doc_orientation_classify</code>: <code>(bool)</code> Controls whether to enable document orientation classification.</li>
+<li><code>use_doc_unwarping</code>: <code>(bool)</code> Controls whether to enable document unwarping.</li>
+</ul>
+</li>
+<li><code>angle</code>: <code>(int)</code> The predicted result of document orientation classification. When enabled, it takes values [0, 1, 2, 3], corresponding to [0°, 90°, 180°, 270°]; when disabled, it is -1.</li>
+</ul>
 </li>
 <li>
-<p>此外，也支持通过属性获取带结果的可视化图像和预测结果，具体如下：</p>
+<p><code>dt_polys</code>: <code>(List[numpy.ndarray])</code> A list of polygon boxes for seal text detection. Each detection box is represented by a numpy array of multiple vertex coordinates, with the array shape being (n, 2).</p>
+</li>
+<li>
+<p><code>dt_scores</code>: <code>(List[float])</code> A list of confidence scores for text detection boxes.</p>
+</li>
+<li>
+<p><code>text_det_params</code>: <code>(Dict[str, Dict[str, int, float]])</code> Configuration parameters for the text detection module.</p>
+<ul>
+<li><code>limit_side_len</code>: <code>(int)</code> The side length limit value during image preprocessing.</li>
+<li><code>limit_type</code>: <code>(str)</code> The handling method for side length limits.</li>
+<li><code>thresh</code>: <code>(float)</code> The confidence threshold for text pixel classification.</li>
+<li><code>box_thresh</code>: <code>(float)</code> The confidence threshold for text detection boxes.</li>
+<li><code>unclip_ratio</code>: <code>(float)</code> The expansion ratio for text detection boxes.</li>
+<li><code>text_type</code>: <code>(str)</code> The type of seal text detection, currently fixed as "seal".</li>
+</ul>
+</li>
+<li>
+<p><code>text_rec_score_thresh</code>: <code>(float)</code> The filtering threshold for text recognition results.</p>
+</li>
+<li>
+<p><code>rec_texts</code>: <code>(List[str])</code> A list of text recognition results, containing only texts with confidence scores above <code>text_rec_score_thresh</code>.</p>
+</li>
+<li>
+<p><code>rec_scores</code>: <code>(List[float])</code> A list of confidence scores for text recognition, filtered by <code>text_rec_score_thresh</code>.</p>
+</li>
+<li>
+<p><code>rec_polys</code>: <code>(List[numpy.ndarray])</code> A list of text detection boxes filtered by confidence score, in the same format as <code>dt_polys</code>.</p>
+</li>
+<li>
+<p><code>rec_boxes</code>: <code>(numpy.ndarray)</code> An array of rectangular bounding boxes for detection boxes; the seal recognition pipeline returns an empty array.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Calling the <code>save_to_json()</code> method will save the above content to the specified <code>save_path</code>. If a directory is specified, the saved path will be <code>save_path/{your_img_basename}_res.json</code>. If a file is specified, it will be saved directly to that file. Since JSON files do not support saving numpy arrays, <code>numpy.array</code> types will be converted to list format.</p>
+</li>
+<li>
+<p>Calling the <code>save_to_img()</code> method will save the visualization results to the specified <code>save_path</code>. If a directory is specified, the saved path will be <code>save_path/{your_img_basename}_seal_res_region1.{your_img_extension}</code>. If a file is specified, it will be saved directly to that file. (The pipeline usually contains multiple result images, so it is not recommended to specify a specific file path directly, as multiple images will be overwritten, and only the last image will be retained.)</p>
+</li>
+<li>
+<p>Additionally, you can obtain visualized images with results and prediction results through attributes, as follows:</p>
 </li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>属性说明</th>
+<th>Attribute</th>
+<th>Description</th>
 </tr>
 </thead>
 <tr>
 <td rowspan="1"><code>json</code></td>
-<td rowspan="1">获取预测的 <code>json</code> 格式的结果</td>
+<td rowspan="1">Get the prediction results in <code>json</code> format.</td>
 </tr>
 <tr>
 <td rowspan="2"><code>img</code></td>
-<td rowspan="2">获取格式为 <code>dict</code> 的可视化图像</td>
+<td rowspan="2">Get the visualization results in <code>dict</code> format.</td>
 </tr>
 </table>
 
 <ul>
-<li><code>json</code> 属性获取的预测结果为dict类型的数据，相关内容与调用 <code>save_to_json()</code> 方法保存的内容一致。</li>
-<li><code>img</code> 属性返回的预测结果是一个字典类型的数据。其中，键分别为 <code>layout_det_res</code> 、  <code>seal_res_region1</code>和 <code>preprocessed_img</code>，对应的值是三个 <code>Image.Image</code> 对象：一个用于显示版面检测可视化，一个用于显示印章文本识别结果的可视化图像，另一个用于展示图像预处理的可视化图像。如果没有使用图像预处理子模块，则字典中不包含preprocessed_img，如果没有使用版面区域检测模块，则字典中不包含layout_det_res。</li>
+<li>The prediction results obtained through the <code>json</code> attribute are of dict type, with content consistent with what is saved by calling the <code>save_to_json()</code> method.</li>
+<li>The prediction results returned by the <code>img</code> attribute are of dict type. The keys are <code>layout_det_res</code>, <code>seal_res_region1</code>, and <code>preprocessed_img</code>, corresponding to three <code>Image.Image</code> objects: one for visualizing layout detection, one for visualizing seal text recognition results, and one for visualizing image preprocessing. If the image preprocessing sub-module is not used, <code>preprocessed_img</code> will not be included in the dictionary. If the layout region detection module is not used, <code>layout_det_res</code> will not be included.</li>
 </ul>
-<h2 id="3">3. 开发集成/部署<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>如果产线可以达到您对产线推理速度和精度的要求，您可以直接进行开发集成/部署。</p>
-<p>若您需要将产线直接应用在您的Python项目中，可以参考 <a href="#22-python脚本方式集成">2.2 Python脚本方式</a>中的示例代码。</p>
-<p>此外，PaddleOCR 也提供了其他两种部署方式，详细说明如下：</p>
-<p>🚀 高性能推理：在实际生产环境中，许多应用对部署策略的性能指标（尤其是响应速度）有着较严苛的标准，以确保系统的高效运行与用户体验的流畅性。为此，PaddleOCR 提供高性能推理功能，旨在对模型推理及前后处理进行深度性能优化，实现端到端流程的显著提速，详细的高性能推理流程请参考<a href="../deployment/high_performance_inference.html">高性能推理指南</a>。</p>
-<p>☁️ 服务化部署：服务化部署是实际生产环境中常见的一种部署形式。通过将推理功能封装为服务，客户端可以通过网络请求来访问这些服务，以获取推理结果。详细的产线服务化部署流程请参考<a href="../deployment/serving.html">服务化部署指南</a>。</p>
-<p>以下是基础服务化部署的API参考与多语言服务调用示例：</p>
-<details><summary>API参考</summary>
-<p>对于服务提供的主要操作：</p>
+<p>Additionally, you can obtain the configuration file for the seal text recognition pipeline and load the configuration file for prediction. You can execute the following command to save the results in <code>my_path</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>paddlex --get_pipeline_config seal_recognition --save_path ./my_path
+</span></code></pre></div>
+<p>If you have obtained the configuration file, you can customize the settings for the seal text recognition pipeline by simply modifying the <code>pipeline</code> parameter value in the <code>create_pipeline</code> method to the path of the pipeline configuration file. The example is as follows:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">paddlex</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_pipeline</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">pipeline</span> <span class="o">=</span> <span class="n">create_pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="o">=</span><span class="s2">&quot;./my_path/seal_recognition.yaml&quot;</span><span class="p">)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">output</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">&quot;seal_text_det.png&quot;</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">output</span><span class="p">:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">res</span><span class="o">.</span><span class="n">print</span><span class="p">()</span> <span class="c1">## 打印预测的结构化输出</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">res</span><span class="o">.</span><span class="n">save_to_img</span><span class="p">(</span><span class="s2">&quot;./output/&quot;</span><span class="p">)</span> <span class="c1">## 保存可视化结果</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">res</span><span class="o">.</span><span class="n">save_to_json</span><span class="p">(</span><span class="s2">&quot;./output/&quot;</span><span class="p">)</span> <span class="c1">## 保存预测结果的json文件</span>
+</span></code></pre></div>
+<p>(1) Instantiate the seal text recognition production object through <code>SealRecognition()</code>. The specific parameter descriptions are as follows:</p>
+<p>Here's the translation of the table into English:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>doc_orientation_classify_model_name</code></td>
+<td>Name of the document orientation classification model. If set to <code>None</code>, the default model will be used.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>doc_orientation_classify_model_dir</code></td>
+<td>Directory path of the document orientation classification model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>doc_unwarping_model_name</code></td>
+<td>Name of the text image correction model. If set to <code>None</code>, the default model will be used.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>doc_unwarping_model_dir</code></td>
+<td>Directory path of the text image correction model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_detection_model_name</code></td>
+<td>Name of the layout detection model. If set to <code>None</code>, the default model will be used.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_detection_model_dir</code></td>
+<td>Directory path of the layout detection model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_text_detection_model_name</code></td>
+<td>Name of the seal text detection model. If set to <code>None</code>, the default model will be used.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_text_detection_model_dir</code></td>
+<td>Directory path of the seal text detection model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>text_recognition_model_name</code></td>
+<td>Name of the text recognition model. If set to <code>None</code>, the default model will be used.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>text_recognition_model_dir</code></td>
+<td>Directory path of the text recognition model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>text_recognition_batch_size</code></td>
+<td>Batch size for the text recognition model. If set to <code>None</code>, the default batch size is <code>1</code>.</td>
+<td><code>int</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_doc_orientation_classify</code></td>
+<td>Whether to load the document orientation classification module. If set to <code>None</code>, the default value initialized by the production line will be used, initialized to <code>True</code>.</td>
+<td><code>bool</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_doc_unwarping</code></td>
+<td>Whether to load the text image correction module. If set to <code>None</code>, the default value initialized by the production line will be used, initialized to <code>True</code>.</td>
+<td><code>bool</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_layout_detection</code></td>
+<td>Whether to load the layout detection module. If set to <code>None</code>, the default value initialized by the production line will be used, initialized to <code>True</code>.</td>
+<td><code>bool</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_threshold</code></td>
+<td>Layout detection confidence threshold; only scores greater than this threshold will be output.
 <ul>
-<li>HTTP请求方法为POST。</li>
-<li>请求体和响应体均为JSON数据（JSON对象）。</li>
-<li>当请求处理成功时，响应状态码为<code>200</code>，响应体的属性如下：</li>
+<li><b>float</b>: Any floating point number greater than <code>0</code></li>
+<li><b>dict</b>: Keys are int category IDs, values are any floating point number greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, <code>0.5</code>, will be used</li>
+</ul>
+</td>
+<td><code>float|dict</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_nms</code></td>
+<td>Whether to use post-processing NMS in layout detection. If set to <code>None</code>, the default value initialized by the production line, initialized to <code>True</code>, will be used.</td>
+<td><code>bool</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_unclip_ratio</code></td>
+<td>Scale factor for the sides of the detection box.
+<ul>
+<li><b>float</b>: A floating point number greater than 0, e.g., 1.1, indicates that the width and height of the detection box output by the model will be expanded by 1.1 times, keeping the center unchanged</li>
+<li><b>list</b>: e.g., [1.2, 1.5], indicates that the width will be expanded by 1.2 times and the height by 1.5 times, keeping the center unchanged</li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, initialized to 1.0, will be used</li>
+</ul>
+</td>
+<td><code>float|list</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_merge_bboxes_mode</code></td>
+<td>Mode for merging detection boxes output by the model in layout detection.
+<ul>
+<li><b>large</b>: When set to large, only the largest external box will be retained for overlapping detection boxes, and overlapping internal boxes will be deleted</li>
+<li><b>small</b>: When set to small, only the small internal box will be retained, and overlapping external boxes will be deleted</li>
+<li><b>union</b>: No filtering will be performed, and both internal and external boxes will be retained</li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, initialized to <code>large</code>, will be used</li>
+</ul>
+</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_det_limit_side_len</code></td>
+<td>Image side length limit for seal text detection.
+<ul>
+<li><b>int</b>: Any integer greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, initialized to <code>736</code>, will be used</li>
+</ul>
+</td>
+<td><code>int</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_det_limit_type</code></td>
+<td>Image side length limit type for seal text detection.
+<ul>
+<li><b>str</b>: Supports <code>min</code> and <code>max</code>; <code>min</code> ensures that the shortest side of the image is not less than <code>det_limit_side_len</code>, while <code>max</code> ensures that the longest side of the image is not greater than <code>limit_side_len</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, initialized to <code>min</code>, will be used</li>
+</ul>
+</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_det_thresh</code></td>
+<td>Detection pixel threshold; only pixels with scores greater than this threshold in the output probability map will be considered as text pixels.
+<ul>
+<li><b>float</b>: Any floating point number greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, <code>0.2</code>, will be used</li>
+</ul>
+</td>
+<td><code>float</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_det_box_thresh</code></td>
+<td>Detection box threshold; when the average score of all pixels within a detection result box is greater than this threshold, the result is considered a text area.
+<ul>
+<li><b>float</b>: Any floating point number greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, <code>0.6</code>, will be used</li>
+</ul>
+</td>
+<td><code>float</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_det_unclip_ratio</code></td>
+<td>Seal text detection expansion coefficient; the larger the value, the greater the expansion area.
+<ul>
+<li><b>float</b>: Any floating point number greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, <code>0.5</code>, will be used</li>
+</ul>
+</td>
+<td><code>float</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_rec_score_thresh</code></td>
+<td>Text recognition threshold; text results with scores greater than this threshold will be retained.
+<ul>
+<li><b>float</b>: Any floating point number greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line, <code>0.0</code>, will be used, meaning no threshold is set</li>
+</ul>
+</td>
+<td><code>float</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td>The device used for inference. Supports specifying a specific card number.
+<ul>
+<li><b>CPU</b>: e.g., <code>cpu</code> indicates using the CPU for inference</li>
+<li><b>GPU</b>: e.g., <code>gpu:0</code> indicates using the first GPU for inference</li>
+<li><b>NPU</b>: e.g., <code>npu:0</code> indicates using the first NPU for inference</li>
+<li><b>XPU</b>: e.g., <code>xpu:0</code> indicates using the first XPU for inference</li>
+<li><b>MLU</b>: e.g., <code>mlu:0</code> indicates using the first MLU for inference</li>
+<li><b>DCU</b>: e.g., <code>dcu:0</code> indicates using the first DCU for inference</li>
+<li><b>None</b>: If set to <code>None</code>, the default value initialized by the production line will be used, which will prioritize using local GPU 0 if available, otherwise it will use the CPU</li>
+</ul>
+</td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>enable_hpi</code></td>
+<td>Whether to enable high-performance inference.</td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>use_tensorrt</code></td>
+<td>Whether to use TensorRT for inference acceleration.</td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>min_subgraph_size</code></td>
+<td>Minimum subgraph size, used for optimizing model subgraph computation.</td>
+<td><code>int</code></td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><code>precision</code></td>
+<td>Computation precision, such as fp32 or fp16.</td>
+<td><code>str</code></td>
+<td><code>fp32</code></td>
+</tr>
+<tr>
+<td><code>enable_mkldnn</code></td>
+<td>Whether to enable the MKL-DNN acceleration library. If set to <code>None</code>, it will be enabled by default.</td>
+<td><code>bool</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>cpu_threads</code></td>
+<td>The number of threads to use when performing inference on the CPU.</td>
+<td><code>int</code></td>
+<td><code>8</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>(2) Call the <code>predict()</code> method of the seal text recognition production object for inference prediction. This method will return a list of results.</p>
+<p>Additionally, the production line also offers the <code>predict_iter()</code> method. Both methods are identical in terms of parameter acceptance and result return; the difference lies in that <code>predict_iter()</code> returns a <code>generator</code>, allowing for gradual processing and retrieval of prediction results. This is suitable for handling large datasets or scenarios where memory saving is desired. You can choose either method based on your actual needs.</p>
+<p>Below are the parameters for the <code>predict()</code> method and their descriptions:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Options</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tr>
+<td><code>input</code></td>
+<td>Data to be predicted, supports multiple input types (required)</td>
+<td><code>Python Var|str|list</code></td>
+<td>
+<ul>
+<li><b>Python Var</b>: Image data represented by <code>numpy.ndarray</code></li>
+<li><b>str</b>: Local path of an image or PDF file, e.g., <code>/root/data/img.jpg</code>; <b>URL link</b>, e.g., the network URL of an image or PDF file: <a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/seal_text_det.png">Example</a>; <b>Local directory</b>, containing images to be predicted, e.g., <code>/root/data/</code> (currently does not support prediction of PDF files in directories; PDF files must be specified with an exact file path)</li>
+<li><b>List</b>: Elements of the list must be of the above types, e.g., <code>[numpy.ndarray, numpy.ndarray]</code>, <code>[\"/root/data/img1.jpg\", \"/root/data/img2.jpg\"]</code>, <code>[\"/root/data1\", \"/root/data2\"]</code></li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>device</code></td>
+<td>Inference device for the pipeline</td>
+<td><code>str|None</code></td>
+<td>
+<ul>
+<li><b>CPU</b>: e.g., <code>cpu</code> for CPU inference;</li>
+<li><b>GPU</b>: e.g., <code>gpu:0</code> for inference using the first GPU;</li>
+<li><b>NPU</b>: e.g., <code>npu:0</code> for inference using the first NPU;</li>
+<li><b>XPU</b>: e.g., <code>xpu:0</code> for inference using the first XPU;</li>
+<li><b>MLU</b>: e.g., <code>mlu:0</code> for inference using the first MLU;</li>
+<li><b>DCU</b>: e.g., <code>dcu:0</code> for inference using the first DCU;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used. During initialization, the local GPU device 0 will be prioritized; if unavailable, the CPU device will be used.</li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_doc_orientation_classify</code></td>
+<td>Whether to use the document orientation classification module</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_doc_unwarping</code></td>
+<td>Whether to use the document unwarping module</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_layout_detection</code></td>
+<td>Whether to use the layout detection module</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_threshold</code></td>
+<td>Confidence threshold for layout detection; only scores above this threshold will be output</td>
+<td><code>float|dict|None</code></td>
+<td>
+<ul>
+<li><b>float</b>: Any float greater than <code>0</code></li>
+<li><b>dict</b>: Key is the int category ID, value is any float greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>0.5</code></li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_nms</code></td>
+<td>Whether to use Non-Maximum Suppression (NMS) for layout detection post-processing</td>
+<td><code>bool|None</code></td>
+<td>
+<ul>
+<li><b>bool</b>: <code>True</code> or <code>False</code>;</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>True</code>.</li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>layout_unclip_ratio</code></td>
+<td>Expansion ratio of detection box edges; if not specified, the default value from the PaddleX official model configuration will be used</td>
+<td><code>float|list|None</code></td>
+<td>
+<ul>
+<li><b>float</b>: Any float greater than 0, e.g., 1.1, which means expanding the width and height of the detection box by 1.1 times while keeping the center unchanged</li>
+<li><b>list</b>: e.g., [1.2, 1.5], which means expanding the width of the detection box by 1.2 times and the height by 1.5 times while keeping the center unchanged</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as 1.0</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><code>layout_merge_bboxes_mode</code></td>
+<td>Merging mode for detection boxes in layout detection output; if not specified, the default value from the PaddleX official model configuration will be used</td>
+<td><code>string|None</code></td>
+<td>
+<ul>
+<li><b>large</b>: When set to <code>large</code>, only the largest external box will be retained for overlapping detection boxes, and the internal overlapping boxes will be removed.</li>
+<li><b>small</b>: When set to <code>small</code>, only the smallest internal box will be retained for overlapping detection boxes, and the external overlapping boxes will be removed.</li>
+<li><b>union</b>: No filtering of boxes will be performed; both internal and external boxes will be retained.</li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>large</code>.</li>
+</ul>
+</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>seal_det_limit_side_len</code></td>
+<td>Side length limit for seal text detection</td>
+<td><code>int|None</code></td>
+<td>
+<ul>
+<li><b>int</b>: Any integer greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>736</code></li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>seal_rec_score_thresh</code></td>
+<td>Text recognition threshold; text results with scores above this threshold will be retained</td>
+<td><code>float|None</code></td>
+<td>
+<ul>
+<li><b>float</b>: Any float greater than <code>0</code></li>
+<li><b>None</b>: If set to <code>None</code>, the default value from the pipeline initialization will be used, initialized as <code>0.0</code>. This means no threshold is applied.</li>
+</ul>
+</td>
+<td><code>None</code></td>
+</tr>
+</table>
+
+<p>(3) Process the prediction results. The prediction result for each sample is of <code>dict</code> type and supports operations such as printing, saving as an image, and saving as a <code>json</code> file:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameter</th>
+<th>Parameter Type</th>
+<th>Parameter Description</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tr>
+<td rowspan="3"><code>print()</code></td>
+<td rowspan="3">Print results to the terminal</td>
+<td><code>format_json</code></td>
+<td><code>bool</code></td>
+<td>Whether to format the output content using <code>JSON</code> indentation</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>indent</code></td>
+<td><code>int</code></td>
+<td>Specify the indentation level to beautify the output <code>JSON</code> data for better readability, effective only when <code>format_json</code> is <code>True</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>ensure_ascii</code></td>
+<td><code>bool</code></td>
+<td>Control whether to escape non-<code>ASCII</code> characters to <code>Unicode</code>. When set to <code>True</code>, all non-<code>ASCII</code> characters will be escaped; <code>False</code> will retain the original characters, effective only when <code>format_json</code> is <code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td rowspan="3"><code>save_to_json()</code></td>
+<td rowspan="3">Save results as a json file</td>
+<td><code>save_path</code></td>
+<td><code>str</code></td>
+<td>The file path to save the results. When it is a directory, the saved file name will be consistent with the input file type</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>indent</code></td>
+<td><code>int</code></td>
+<td>Specify the indentation level to beautify the output <code>JSON</code> data for better readability, effective only when <code>format_json</code> is <code>True</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>ensure_ascii</code></td>
+<td><code>bool</code></td>
+<td>Control whether to escape non-<code>ASCII</code> characters to <code>Unicode</code>. When set to <code>True</code>, all non-<code>ASCII</code> characters will be escaped; <code>False</code> will retain the original characters, effective only when <code>format_json</code> is <code>True</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td><code>save_to_img()</code></td>
+<td>Save results as an image file</td>
+<td><code>save_path</code></td>
+<td><code>str</code></td>
+<td>The file path to save the results, supports directory or file path</td>
+<td>None</td>
+</tr>
+</table>
+
+<p><b>Note:</b> The parameters in the configuration file are the pipeline initialization parameters. If you wish to change the initialization parameters of the seal text recognition pipeline, you can directly modify the parameters in the configuration file and load the configuration file for prediction. Additionally, CLI prediction also supports passing in a configuration file. Simply specify the path of the configuration file with <code>--pipeline</code>.</p>
+<ul>
+<li>
+<p>Calling the <code>print()</code> method will print the results to the terminal, and the explanations of the printed content are as follows:</p>
+<ul>
+<li>
+<p><code>input_path</code>: <code>(str)</code> The input path of the image to be predicted.</p>
+</li>
+<li>
+<p><code>model_settings</code>: <code>(Dict[str, bool])</code> The model parameters required for pipeline configuration.</p>
+<ul>
+<li><code>use_doc_preprocessor</code>: <code>(bool)</code> Controls whether to enable the document preprocessing sub-pipeline.</li>
+<li><code>use_layout_detection</code>: <code>(bool)</code> Controls whether to enable the layout detection sub-module.</li>
+</ul>
+</li>
+<li>
+<p><code>layout_det_res</code>: <code>(Dict[str, Union[List[numpy.ndarray], List[float]]])</code> The output result of the layout detection sub-module. Only exists when <code>use_layout_detection=True</code>.</p>
+<ul>
+<li><code>input_path</code>: <code>(Union[str, None])</code> The image path accepted by the layout detection module. Saved as <code>None</code> when the input is a <code>numpy.ndarray</code>.</li>
+<li><code>page_index</code>: <code>(Union[int, None])</code> Indicates the current page number of the PDF if the input is a PDF file; otherwise, it is <code>None</code>.</li>
+<li><code>boxes</code>: <code>(List[Dict])</code> A list of detected layout seal regions, with each element containing the following fields:<ul>
+<li><code>cls_id</code>: <code>(int)</code> The class ID of the detected seal region.</li>
+<li><code>score</code>: <code>(float)</code> The confidence score of the detected region.</li>
+<li><code>coordinate</code>: <code>(List[float])</code> The coordinates of the four corners of the detection box, in the order of x1, y1, x2, y2, representing the x-coordinate of the top-left corner, the y-coordinate of the top-left corner, the x-coordinate of the bottom-right corner, and the y-coordinate of the bottom-right corner.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>seal_res_list</code>: <code>List[Dict]</code> A list of seal text recognition results, with each element containing the following fields:</p>
+<ul>
+<li><code>input_path</code>: <code>(Union[str, None])</code> The image path accepted by the seal text recognition pipeline. Saved as <code>None</code> when the input is a <code>numpy.ndarray</code>.</li>
+<li><code>page_index</code>: <code>(Union[int, None])</code> Indicates the current page number of the PDF if the input is a PDF file; otherwise, it is <code>None</code>.</li>
+<li><code>model_settings</code>: <code>(Dict[str, bool])</code> The model configuration parameters for the seal text recognition pipeline.</li>
+<li><code>use_doc_preprocessor</code>: <code>(bool)</code> Controls whether to enable the document preprocessing sub-pipeline.</li>
+<li><code>use_textline_orientation</code>: <code>(bool)</code> Controls whether to enable the text line orientation classification sub-module.</li>
+</ul>
+</li>
+<li>
+<p><code>doc_preprocessor_res</code>: <code>(Dict[str, Union[str, Dict[str, bool], int]])</code> The output result of the document preprocessing sub-pipeline. Only exists when <code>use_doc_preprocessor=True</code>.</p>
+<ul>
+<li><code>input_path</code>: <code>(Union[str, None])</code> The image path accepted by the document preprocessing sub-pipeline. Saved as <code>None</code> when the input is a <code>numpy.ndarray</code>.</li>
+<li><code>model_settings</code>: <code>(Dict)</code> The model configuration parameters for the preprocessing sub-pipeline.<ul>
+<li><code>use_doc_orientation_classify</code>: <code>(bool)</code> Controls whether to enable document orientation classification.</li>
+<li><code>use_doc_unwarping</code>: <code>(bool)</code> Controls whether to enable document unwarping.</li>
+</ul>
+</li>
+<li><code>angle</code>: <code>(int)</code> The predicted result of document orientation classification. When enabled, it takes values [0, 1, 2, 3], corresponding to [0°, 90°, 180°, 270°]; when disabled, it is -1.</li>
+</ul>
+</li>
+<li>
+<p><code>dt_polys</code>: <code>(List[numpy.ndarray])</code> A list of polygon boxes for seal text detection. Each detection box is represented by a numpy array of multiple vertex coordinates, with the array shape being (n, 2).</p>
+</li>
+<li>
+<p><code>dt_scores</code>: <code>(List[float])</code> A list of confidence scores for text detection boxes.</p>
+</li>
+<li>
+<p><code>text_det_params</code>: <code>(Dict[str, Dict[str, int, float]])</code> Configuration parameters for the text detection module.</p>
+<ul>
+<li><code>limit_side_len</code>: <code>(int)</code> The side length limit value during image preprocessing.</li>
+<li><code>limit_type</code>: <code>(str)</code> The handling method for side length limits.</li>
+<li><code>thresh</code>: <code>(float)</code> The confidence threshold for text pixel classification.</li>
+<li><code>box_thresh</code>: <code>(float)</code> The confidence threshold for text detection boxes.</li>
+<li><code>unclip_ratio</code>: <code>(float)</code> The expansion ratio for text detection boxes.</li>
+<li><code>text_type</code>: <code>(str)</code> The type of seal text detection, currently fixed as "seal".</li>
+</ul>
+</li>
+<li>
+<p><code>text_rec_score_thresh</code>: <code>(float)</code> The filtering threshold for text recognition results.</p>
+</li>
+<li>
+<p><code>rec_texts</code>: <code>(List[str])</code> A list of text recognition results, containing only texts with confidence scores above <code>text_rec_score_thresh</code>.</p>
+</li>
+<li>
+<p><code>rec_scores</code>: <code>(List[float])</code> A list of confidence scores for text recognition, filtered by <code>text_rec_score_thresh</code>.</p>
+</li>
+<li>
+<p><code>rec_polys</code>: <code>(List[numpy.ndarray])</code> A list of text detection boxes filtered by confidence score, in the same format as <code>dt_polys</code>.</p>
+</li>
+<li>
+<p><code>rec_boxes</code>: <code>(numpy.ndarray)</code> An array of rectangular bounding boxes for detection boxes; the seal recognition pipeline returns an empty array.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Calling the <code>save_to_json()</code> method will save the above content to the specified <code>save_path</code>. If a directory is specified, the saved path will be <code>save_path/{your_img_basename}_res.json</code>. If a file is specified, it will be saved directly to that file. Since JSON files do not support saving numpy arrays, <code>numpy.array</code> types will be converted to list format.</p>
+</li>
+<li>
+<p>Calling the <code>save_to_img()</code> method will save the visualization results to the specified <code>save_path</code>. If a directory is specified, the saved path will be <code>save_path/{your_img_basename}_seal_res_region1.{your_img_extension}</code>. If a file is specified, it will be saved directly to that file. (The pipeline usually contains multiple result images, so it is not recommended to specify a specific file path directly, as multiple images will be overwritten, and only the last image will be retained.)</p>
+</li>
+<li>
+<p>Additionally, you can obtain visualized images with results and prediction results through attributes, as follows:</p>
+</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>类型</th>
-<th>含义</th>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tr>
+<td rowspan="1"><code>json</code></td>
+<td rowspan="1">Get the prediction results in <code>json</code> format.</td>
+</tr>
+<tr>
+<td rowspan="2"><code>img</code></td>
+<td rowspan="2">Get the visualization results in <code>dict</code> format.</td>
+</tr>
+</table>
+
+<ul>
+<li>The prediction results obtained through the <code>json</code> attribute are of dict type, with content consistent with what is saved by calling the <code>save_to_json()</code> method.</li>
+<li>The prediction results returned by the <code>img</code> attribute are of dict type. The keys are <code>layout_det_res</code>, <code>seal_res_region1</code>, and <code>preprocessed_img</code>, corresponding to three <code>Image.Image</code> objects: one for visualizing layout detection, one for visualizing seal text recognition results, and one for visualizing image preprocessing. If the image preprocessing sub-module is not used, <code>preprocessed_img</code> will not be included in the dictionary. If the layout region detection module is not used, <code>layout_det_res</code> will not be included.</li>
+</ul>
+<h2 id="3-development-integrationdeployment">3. Development Integration/Deployment<a class="headerlink" href="#3-development-integrationdeployment" title="Permanent link">&para;</a></h2>
+<p>If the pipeline meets your requirements for inference speed and accuracy, you can proceed directly with development integration/deployment.</p>
+<p>If you need to integrate the pipeline into your Python project, you can refer to the example code in <a href="#22-python脚本方式集成">2.2 Python Script Method</a>.</p>
+<p>In addition, PaddleX also provides three other deployment methods, which are detailed as follows:</p>
+<p>🚀 High-Performance Inference: In real-world production environments, many applications have stringent performance requirements for deployment strategies, especially in terms of response speed, to ensure efficient system operation and a smooth user experience. To address this, PaddleOCR offers high-performance inference capabilities aimed at deeply optimizing the performance of model inference and pre/post-processing, thereby significantly accelerating the end-to-end process. For detailed high-performance inference procedures, please refer to the <a href="../deployment/high_performance_inference.html">High-Performance Inference Guide</a>.</p>
+<p>☁️ Service Deployment: Service deployment is a common form of deployment in real-world production environments. By encapsulating inference functionality into a service, clients can access these services via network requests to obtain inference results. For detailed production service deployment procedures, please refer to the <a href="../deployment/serving.html">Service Deployment Guide</a>.</p>
+<p>Below are the API references for basic serving deployment and multi-language service invocation examples:</p>
+<details><summary>API Reference</summary>
+<p>For the main operations provided by the service:</p>
+<ul>
+<li>The HTTP request method is POST.</li>
+<li>The request body and response body are both JSON data (JSON objects).</li>
+<li>When the request is processed successfully, the response status code is <code>200</code>, and the attributes of the response body are as follows:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>logId</code></td>
 <td><code>string</code></td>
-<td>请求的UUID。</td>
+<td>The UUID of the request.</td>
 </tr>
 <tr>
 <td><code>errorCode</code></td>
 <td><code>integer</code></td>
-<td>错误码。固定为<code>0</code>。</td>
+<td>Error code. Fixed as <code>0</code>.</td>
 </tr>
 <tr>
 <td><code>errorMsg</code></td>
 <td><code>string</code></td>
-<td>错误说明。固定为<code>"Success"</code>。</td>
+<td>Error message. Fixed as <code>"Success"</code>.</td>
 </tr>
 <tr>
 <td><code>result</code></td>
 <td><code>object</code></td>
-<td>操作结果。</td>
+<td>The result of the operation.</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>当请求处理未成功时，响应体的属性如下：</li>
+<li>When the request is not processed successfully, the attributes of the response body are as follows:</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>类型</th>
-<th>含义</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>logId</code></td>
 <td><code>string</code></td>
-<td>请求的UUID。</td>
+<td>The UUID of the request.</td>
 </tr>
 <tr>
 <td><code>errorCode</code></td>
 <td><code>integer</code></td>
-<td>错误码。与响应状态码相同。</td>
+<td>Error code. Same as the response status code.</td>
 </tr>
 <tr>
 <td><code>errorMsg</code></td>
 <td><code>string</code></td>
-<td>错误说明。</td>
+<td>Error message.</td>
 </tr>
 </tbody>
 </table>
-<p>服务提供的主要操作如下：</p>
+<p>The main operations provided by the service are as follows:</p>
 <ul>
 <li><b><code>infer</code></b></li>
 </ul>
-<p>获取印章文本识别结果。</p>
+<p>Obtain the seal text recognition result.</p>
 <p><code>POST /seal-recognition</code></p>
 <ul>
-<li>请求体的属性如下：</li>
+<li>The attributes of the request body are as follows:</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>类型</th>
-<th>含义</th>
-<th>是否必填</th>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>file</code></td>
 <td><code>string</code></td>
-<td>服务器可访问的图像文件或PDF文件的URL，或上述类型文件内容的Base64编码结果。默认对于超过10页的PDF文件，只有前10页的内容会被处理。<br /> 要解除页数限制，请在产线配置文件中添加以下配置：
+<td>The URL of an image or PDF file accessible by the server, or the Base64-encoded content of the file. By default, for PDF files exceeding 10 pages, only the content of the first 10 pages will be processed.<br />
+To remove the page limit, please add the following configuration to the pipeline configuration file:
 <pre><code>Serving:
   extra:
     max_num_input_imgs: null
-</code></pre>
-</td>
-<td>是</td>
+</code></pre></td>
+<td>Yes</td>
 </tr>
 <tr>
 <td><code>fileType</code></td>
 <td><code>integer</code> | <code>null</code></td>
-<td>文件类型。<code>0</code>表示PDF文件，<code>1</code>表示图像文件。若请求体无此属性，则将根据URL推断文件类型。</td>
-<td>否</td>
+<td>The type of file. <code>0</code> indicates a PDF file, <code>1</code> indicates an image file. If this attribute is not present in the request body, the file type will be inferred from the URL.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>useDocOrientationClassify</code></td>
 <td><code>boolean</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>use_doc_orientation_classify</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>use_doc_orientation_classify</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>useDocUnwarping</code></td>
 <td><code>boolean</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>use_doc_unwarping</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>use_doc_unwarping</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>useLayoutDetection</code></td>
 <td><code>boolean</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>use_layout_detection</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>use_layout_detection</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>layoutThreshold</code></td>
 <td><code>number</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>layout_threshold</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>layout_threshold</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>layoutNms</code></td>
 <td><code>boolean</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>layout_nms</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>layout_nms</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>layoutUnclipRatio</code></td>
 <td><code>number</code> | <code>array</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>layout_unclip_ratio</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>layout_unclip_ratio</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>layoutMergeBboxesMode</code></td>
 <td><code>string</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>layout_merge_bboxes_mode</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>layout_merge_bboxes_mode</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>sealDetLimitSideLen</code></td>
 <td><code>integer</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>seal_det_limit_side_len</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>seal_det_limit_side_len</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>sealDetLimitType</code></td>
 <td><code>string</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>seal_det_limit_type</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>seal_det_limit_type</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>sealDetThresh</code></td>
 <td><code>number</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>seal_det_thresh</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>seal_det_thresh</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>sealDetBoxThresh</code></td>
 <td><code>number</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>seal_det_box_thresh</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>seal_det_box_thresh</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>sealDetUnclipRatio</code></td>
 <td><code>number</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>seal_det_unclip_ratio</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>seal_det_unclip_ratio</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 <tr>
 <td><code>sealRecScoreThresh</code></td>
 <td><code>number</code> | <code>null</code></td>
-<td>请参阅产线对象中 <code>predict</code> 方法的 <code>seal_rec_score_thresh</code> 参数相关说明。</td>
-<td>否</td>
+<td>Please refer to the description of the <code>seal_rec_score_thresh</code> parameter of the pipeline object's <code>predict</code> method.</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>请求处理成功时，响应体的<code>result</code>具有如下属性：</li>
+<li>When the request is processed successfully, the <code>result</code> in the response body has the following properties:</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>类型</th>
-<th>含义</th>
+<th>Name</th>
+<th>Type</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>sealRecResults</code></td>
 <td><code>object</code></td>
-<td>印章文本识别结果。数组长度为1（对于图像输入）或实际处理的文档页数（对于PDF输入）。对于PDF输入，数组中的每个元素依次表示PDF文件中实际处理的每一页的结果。</td>
+<td>The seal text recognition result. The array length is 1 (for image input) or the actual number of document pages processed (for PDF input). For PDF input, each element in the array represents the result of each page actually processed in the PDF file.</td>
 </tr>
 <tr>
 <td><code>dataInfo</code></td>
 <td><code>object</code></td>
-<td>输入数据信息。</td>
+<td>Information about the input data.</td>
 </tr>
 </tbody>
 </table>
-<p><code>sealRecResults</code>中的每个元素为一个<code>object</code>，具有如下属性：</p>
+<p>Each element in <code>sealRecResults</code> is an <code>object</code> with the following properties:</p>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>类型</th>
-<th>含义</th>
+<th>Name</th>
+<th>Type</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>prunedResult</code></td>
 <td><code>object</code></td>
-<td>产线对象的 <code>predict</code> 方法生成结果的 JSON 表示中 <code>res</code> 字段的简化版本，其中去除了 <code>input_path</code> 和 <code>page_index</code> 字段。</td>
+<td>A simplified version of the <code>res</code> field in the JSON representation generated by the <code>predict</code> method of the production object, where the <code>input_path</code> and the <code>page_index</code> fields are removed.</td>
 </tr>
 <tr>
 <td><code>outputImages</code></td>
 <td><code>object</code> | <code>null</code></td>
-<td>参见产线预测结果的 <code>img</code> 属性说明。图像为JPEG格式，使用Base64编码。</td>
+<td>See the description of the <code>img</code> attribute of the result of the pipeline prediction. The images are in JPEG format and encoded in Base64.</td>
 </tr>
 <tr>
 <td><code>inputImage</code></td>
 <td><code>string</code> | <code>null</code></td>
-<td>输入图像。图像为JPEG格式，使用Base64编码。</td>
+<td>The input image. The image is in JPEG format and encoded in Base64.</td>
 </tr>
 </tbody>
 </table></details>
-<details><summary>多语言调用服务示例</summary>
+<details><summary>Multi-language Service Invocation Example</summary>
 <details>
 <summary>Python</summary>
 
@@ -7148,9 +7346,45 @@ for i, res in enumerate(result["sealRecResults"]):
 </code></pre></details>
 </details>
 <p><br/></p>
-<h2 id="4">4. 二次开发<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>如果印章文本识别产线提供的默认模型权重在您的场景中，精度或速度不满意，您可以尝试利用<b>您自己拥有的特定领域或应用场景的数据</b>对现有模型进行进一步的<b>微调</b>，以提升印章文本识别产线的在您的场景中的识别效果。</p>
-<p>......</p>
+<h2 id="4-custom-development">4. Custom Development<a class="headerlink" href="#4-custom-development" title="Permanent link">&para;</a></h2>
+<p>If the default model weights provided by the seal text recognition pipeline do not meet your requirements in terms of accuracy or speed, you can try to <b>fine-tune</b> the existing models using <b>your own domain-specific or application data</b> to improve the recognition performance of the seal text recognition pipeline in your scenario.</p>
+<p>Since the seal text recognition pipeline consists of several modules, if the pipeline's performance does not meet expectations, the issue may arise from any one of these modules. You can analyze images with poor recognition results to identify which module is problematic and refer to the corresponding fine-tuning tutorial links in the table below for model fine-tuning.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Fine-Tuning Module</th>
+<th>Fine-Tuning Reference Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inaccurate or missing seal position detection</td>
+<td>Layout Detection Module</td>
+<td><a href="https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/layout_detection.html">Link</a></td>
+</tr>
+<tr>
+<td>Missing text detection</td>
+<td>Text Detection Module</td>
+<td><a href="https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/seal_text_detection.html">Link</a></td>
+</tr>
+<tr>
+<td>Inaccurate text content</td>
+<td>Text Recognition Module</td>
+<td><a href="https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/text_recognition.html">Link</a></td>
+</tr>
+<tr>
+<td>Inaccurate full-image rotation correction</td>
+<td>Document Image Orientation Classification Module</td>
+<td><a href="https://paddlepaddle.github.io/PaddleX/latest/en/module_usage/tutorials/ocr_modules/doc_img_orientation_classification.html">Link</a></td>
+</tr>
+<tr>
+<td>Inaccurate image distortion correction</td>
+<td>Text Image Correction Module</td>
+<td>Not supported for fine-tuning</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -7173,7 +7407,7 @@ for i, res in enumerate(result["sealRecResults"]):
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2025年5月19日 07:27:13">2025年5月19日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 19, 2025 15:18:11">May 19, 2025</span>
   </span>
 
     
@@ -7183,7 +7417,7 @@ for i, res in enumerate(result["sealRecResults"]):
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2025年5月19日 07:27:13">2025年5月19日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 19, 2025 15:18:11">May 19, 2025</span>
   </span>
 
     
